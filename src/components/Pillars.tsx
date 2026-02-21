@@ -136,7 +136,7 @@ export default function Pillars() {
                 <h3 className="font-display text-xl md:text-2xl font-bold tracking-[0.03em] uppercase text-cream mb-2 leading-tight">
                   {pillar.title}
                 </h3>
-                <p className="text-sm font-light text-cream/70 leading-relaxed opacity-0 translate-y-2 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0">
+                <p className="text-sm font-light text-cream/70 leading-relaxed opacity-100 translate-y-0 md:opacity-0 md:translate-y-2 md:group-hover:opacity-100 md:group-hover:translate-y-0 transition-all duration-500">
                   {pillar.subtitle}
                 </p>
               </div>

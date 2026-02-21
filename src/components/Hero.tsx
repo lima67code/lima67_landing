@@ -69,7 +69,7 @@ export default function Hero() {
       {/* Background image with overlay */}
       <div ref={imgRef} className="absolute inset-0 -top-[10%] -bottom-[10%]">
         <img
-          src="dist/images/corporativo.webp"
+          src="/images/corporativo.webp"
           alt=""
           role="presentation"
           className="w-full h-full object-cover"

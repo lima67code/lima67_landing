@@ -146,7 +146,7 @@ export default function FormularioSection() {
                                                 }`}
                                         />
                                         <span
-                                            className={`text-[9px] font-medium tracking-[0.15em] uppercase transition-colors duration-300 ${isActive ? 'text-charcoal' : isDone ? 'text-teal' : 'text-stone'
+                                            className={`hidden md:inline text-[9px] font-medium tracking-[0.15em] uppercase transition-colors duration-300 ${isActive ? 'text-charcoal' : isDone ? 'text-teal' : 'text-stone'
                                                 }`}
                                         >
                                             {label}

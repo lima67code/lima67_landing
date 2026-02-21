@@ -26,7 +26,8 @@ export default function ImagePanel() {
 
     let animationId: number;
     let position = 0;
-    const speed = 0.5; // px per frame
+    const isMobile = window.matchMedia('(max-width: 767px)').matches;
+    const speed = isMobile ? 1.0 : 0.5; // px per frame — más rápido en móvil
 
     // Calculate the width of a single set of images (half of full track)
     const singleSetWidth = track.scrollWidth / 2;
