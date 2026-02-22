@@ -91,6 +91,9 @@ export default function FormularioSection() {
                     <img
                         src="/images/privado.webp"
                         alt="Evento Lima67"
+                        width={800}
+                        height={600}
+                        loading="lazy"
                         className="absolute inset-0 w-full h-full object-cover"
                     />
                     <div className="absolute inset-0 bg-charcoal/55" />

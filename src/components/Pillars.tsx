@@ -121,6 +121,8 @@ export default function Pillars() {
                 <img
                   src={pillar.image}
                   alt={pillar.alt}
+                  width={400}
+                  height={533}
                   className="absolute inset-0 w-full h-[120%] object-cover transition-transform duration-700 group-hover:scale-105"
                   loading="lazy"
                 />

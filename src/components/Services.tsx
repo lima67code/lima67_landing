@@ -126,6 +126,8 @@ export default function Services() {
               <img
                 src={service.image}
                 alt={service.alt}
+                width={400}
+                height={300}
                 className="w-full h-full object-cover"
                 loading="lazy"
               />

@@ -82,8 +82,10 @@ export default function ImagePanel() {
             <img
               src={img.src}
               alt={img.alt}
+              width={450}
+              height={500}
               className="w-full h-full object-cover"
-              loading={i < images.length ? 'eager' : 'lazy'}
+              loading={i < 3 ? 'eager' : 'lazy'}
               draggable={false}
             />
           </div>

@@ -70,8 +70,10 @@ export default function Hero() {
       <div ref={imgRef} className="absolute inset-0 -top-[10%] -bottom-[10%]">
         <img
           src="/images/corporativo.webp"
-          alt=""
-          role="presentation"
+          alt="Ambiente de catering de alta cocina peruana en evento"
+          width={1920}
+          height={1080}
+          fetchPriority="high"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-cream/80" />
