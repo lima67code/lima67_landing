@@ -29,10 +29,12 @@ function loadGtagScript(id: string): Promise<void> {
     script.async = true;
     script.src = `https://www.googletagmanager.com/gtag/js?id=${id}`;
     script.onload = () => {
-      window.gtag('config', id, {
-        send_page_view: false, // Lo enviamos nosotros en cada cambio de ruta (SPA)
-        anonymize_ip: true,
-      });
+      if (window.gtag) {
+        window.gtag('config', id, {
+          send_page_view: false, // Lo enviamos nosotros en cada cambio de ruta (SPA)
+          anonymize_ip: true,
+        });
+      }
       resolve();
     };
     document.head.appendChild(script);
