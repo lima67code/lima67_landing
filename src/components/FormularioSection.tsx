@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { WhatsappLogo, Buildings, Briefcase, Champagne, CalendarBlank, MapPin, ArrowLeft, CookingPot, Wine, Package, ForkKnife } from '@phosphor-icons/react';
+import { Buildings, Briefcase, Champagne, CalendarBlank, MapPin, ArrowLeft, CookingPot, Wine, Package, ForkKnife, Users } from '@phosphor-icons/react';
 
 // En desarrollo usamos proxy (mismo origen) para evitar CORS con n8n
 const N8N_WEBHOOK_URL = import.meta.env.DEV
@@ -96,6 +96,12 @@ const formatoExperienciaOptions = [
         label: 'Alta Cocina de Autor',
         sub: 'Menú degustación, buffet o estaciones de gala. (La experiencia gastronómica de máxima exclusividad).',
     },
+    {
+        id: 'servicio-camareros',
+        icon: Users,
+        label: 'Servicio de Camareros',
+        sub: 'Personal de sala profesional para servicio a mesa, barra o estaciones. (Atención elegante y discreta).',
+    },
 ];
 
 const dimensionOptions = [
@@ -148,21 +154,6 @@ export default function FormularioSection() {
 
     const handleStep4Next = () => {
         if (form.fecha && form.zona) setStep(5);
-    };
-
-    const buildWhatsAppMessage = () => {
-        const protocolo = protocoloOptions.find((p) => p.id === form.protocolo)?.label ?? '';
-        const formato = formatoExperienciaOptions.find((f) => f.id === form.formatoExperiencia)?.label ?? '';
-        const dimension = dimensionOptions.find((d) => d.id === form.dimension)?.label ?? '';
-        const msg = `Hola Fernando, me gustaría solicitar una propuesta para un evento.
-
-📋 Tipo de evento: ${protocolo}
-🍽 Formato: ${formato}
-👥 Dimensión: ${dimension}
-📅 Fecha aproximada: ${form.fecha}
-📍 Zona / Ciudad: ${form.zona}
-👤 Nombre: ${form.nombre}`;
-        return `https://wa.me/34613510777?text=${encodeURIComponent(msg)}`;
     };
 
     const buildWebhookPayload = () => {
@@ -416,20 +407,20 @@ export default function FormularioSection() {
                                     <div className="flex flex-col gap-4 mb-8">
                                         <label className="flex flex-col gap-2">
                                             <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-stone">
-                                                Fecha aproximada
+                                                Fecha del evento
                                             </span>
                                             <div className="relative">
                                                 <CalendarBlank
                                                     size={16}
                                                     weight="light"
-                                                    className="absolute left-4 top-1/2 -translate-y-1/2 text-stone pointer-events-none"
+                                                    className="absolute left-4 top-1/2 -translate-y-1/2 text-stone pointer-events-none z-10"
                                                 />
                                                 <input
-                                                    type="text"
-                                                    placeholder="ej. Marzo 2025, segunda quincena"
+                                                    type="date"
+                                                    min={new Date().toISOString().slice(0, 10)}
                                                     value={form.fecha}
                                                     onChange={(e) => setForm((f) => ({ ...f, fecha: e.target.value }))}
-                                                    className="w-full pl-11 pr-4 py-4 rounded-xl border border-bone bg-white text-sm text-charcoal placeholder-stone/60 focus:outline-none focus:border-teal transition-colors duration-200"
+                                                    className="w-full pl-11 pr-4 py-4 rounded-xl border border-bone bg-white text-sm text-charcoal focus:outline-none focus:border-teal transition-colors duration-200 [color-scheme:light]"
                                                 />
                                             </div>
                                         </label>
@@ -470,7 +461,7 @@ export default function FormularioSection() {
                                         Paso 5 de 5
                                     </p>
                                     <h3 className="font-display text-[clamp(1.4rem,2.5vw,1.9rem)] font-bold leading-[1.15] tracking-[-0.02em] text-charcoal mb-3">
-                                        Gracias. Fernando analizará estos datos personalmente.
+                                        Gracias. Analizaremos estos datos personalmente.
                                     </h3>
                                     <p className="text-sm font-light text-graphite mb-10">
                                         ¿A quién debemos dirigir la propuesta inicial?
@@ -542,16 +533,9 @@ export default function FormularioSection() {
                                     {sent ? (
                                         <div className="rounded-xl border border-teal/30 bg-teal/5 p-6 text-center">
                                             <p className="text-sm font-medium text-teal mb-2">Solicitud enviada correctamente</p>
-                                            <p className="text-[11px] text-stone/80 mb-4">Nos pondremos en contacto contigo a la mayor brevedad.</p>
-                                            <a
-                                                href={buildWhatsAppMessage()}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="inline-flex items-center justify-center gap-2 py-3 px-5 rounded-lg bg-teal text-cream text-[12px] font-medium hover:bg-teal-dark transition-colors"
-                                            >
-                                                <WhatsappLogo size={18} weight="fill" />
-                                                Abrir WhatsApp por si quieres escribir
-                                            </a>
+                                            <p className="text-sm font-light text-charcoal">
+                                                Te llamaremos hoy mismo o en un máximo de 24 horas al número que nos has indicado.
+                                            </p>
                                         </div>
                                     ) : (
                                         <>
