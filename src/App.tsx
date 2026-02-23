@@ -1,7 +1,7 @@
 import { lazy, Suspense, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 
-import { initGoogleAnalytics, sendPageView } from './analytics';
+import { sendPageView } from './analytics';
 import HomePage from './pages/HomePage';
 
 const AvisoLegal = lazy(() => import('./pages/AvisoLegal'));
@@ -10,10 +10,6 @@ const PoliticaCookies = lazy(() => import('./pages/PoliticaCookies'));
 
 function App() {
   const location = useLocation();
-
-  useEffect(() => {
-    initGoogleAnalytics();
-  }, []);
 
   useEffect(() => {
     sendPageView(location.pathname || '/', document.title);

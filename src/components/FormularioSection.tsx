@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { WhatsappLogo, Buildings, Briefcase, Champagne, CalendarBlank, MapPin, ArrowLeft } from '@phosphor-icons/react';
+import { WhatsappLogo, Buildings, Briefcase, Champagne, CalendarBlank, MapPin, ArrowLeft, CookingPot, Wine, Package, ForkKnife } from '@phosphor-icons/react';
 
 // En desarrollo usamos proxy (mismo origen) para evitar CORS con n8n
 const N8N_WEBHOOK_URL = import.meta.env.DEV
@@ -8,11 +8,46 @@ const N8N_WEBHOOK_URL = import.meta.env.DEV
 
 type FormData = {
     protocolo: string;
+    formatoExperiencia: string;
     dimension: string;
     fecha: string;
     zona: string;
     nombre: string;
+    telefonoPrefix: string;
     telefono: string;
+    email: string;
+};
+
+// Prefijos internacionales (Celular / WhatsApp)
+const PHONE_PREFIXES: { value: string; label: string }[] = [
+    { value: '+34', label: 'España +34' },
+    { value: '+351', label: 'Portugal +351' },
+    { value: '+33', label: 'Francia +33' },
+    { value: '+49', label: 'Alemania +49' },
+    { value: '+44', label: 'Reino Unido +44' },
+    { value: '+39', label: 'Italia +39' },
+    { value: '+51', label: 'Perú +51' },
+    { value: '+52', label: 'México +52' },
+    { value: '+54', label: 'Argentina +54' },
+    { value: '+57', label: 'Colombia +57' },
+    { value: '+1', label: 'USA/Canadá +1' },
+    { value: '+41', label: 'Suiza +41' },
+    { value: '+31', label: 'Países Bajos +31' },
+    { value: '+32', label: 'Bélgica +32' },
+];
+
+const PHONE_DIGITS_MIN = 6;
+const PHONE_DIGITS_MAX = 15;
+
+const formatPhoneForPayload = (prefix: string, digits: string) => {
+    const d = digits.replace(/\D/g, '');
+    return d.length >= PHONE_DIGITS_MIN ? `${prefix}${d}` : '';
+};
+const formatPhoneDisplay = (digits: string) => {
+    const d = digits.replace(/\D/g, '').slice(0, PHONE_DIGITS_MAX);
+    if (d.length <= 3) return d;
+    if (d.length <= 6) return `${d.slice(0, 3)} ${d.slice(3)}`;
+    return `${d.slice(0, 3)} ${d.slice(3, 6)} ${d.slice(6)}`.trim();
 };
 
 const protocoloOptions = [
@@ -36,6 +71,33 @@ const protocoloOptions = [
     },
 ];
 
+const formatoExperienciaOptions = [
+    {
+        id: 'show-cooking',
+        icon: CookingPot,
+        label: 'Show cooking',
+        sub: 'Ceviches y estaciones de autor preparadas en vivo. (Ideal para dar dinamismo a la velada).',
+    },
+    {
+        id: 'cocteleria-premium',
+        icon: Wine,
+        label: 'Coctelería Premium',
+        sub: 'Barra de Pisco Sour y combinados de autor. (Perfecto para recepciones y brindis corporativos).',
+    },
+    {
+        id: 'servicio-catering',
+        icon: Package,
+        label: 'Servicio de Catering',
+        sub: 'Logística integral para eventos de cualquier escala. (Gestión completa de principio a fin).',
+    },
+    {
+        id: 'alta-cocina-autor',
+        icon: ForkKnife,
+        label: 'Alta Cocina de Autor',
+        sub: 'Menú degustación, buffet o estaciones de gala. (La experiencia gastronómica de máxima exclusividad).',
+    },
+];
+
 const dimensionOptions = [
     { id: 'xs', label: '< 20 invitados' },
     { id: 'sm', label: '20 – 50' },
@@ -43,7 +105,7 @@ const dimensionOptions = [
     { id: 'lg', label: '> 150' },
 ];
 
-const stepLabels = ['Contexto', 'Dimensión', 'Disponibilidad', 'Contacto'];
+const stepLabels = ['Contexto', 'Formato', 'Dimensión', 'Disponibilidad', 'Contacto'];
 
 export default function FormularioSection() {
     const [step, setStep] = useState(1);
@@ -52,33 +114,50 @@ export default function FormularioSection() {
     const [sent, setSent] = useState(false);
     const [form, setForm] = useState<FormData>({
         protocolo: '',
+        formatoExperiencia: '',
         dimension: '',
         fecha: '',
         zona: '',
         nombre: '',
+        telefonoPrefix: '+34',
         telefono: '',
+        email: '',
     });
+
+    const phoneDigits = form.telefono.replace(/\D/g, '').slice(0, PHONE_DIGITS_MAX);
+    const phoneValid =
+        phoneDigits.length >= PHONE_DIGITS_MIN &&
+        phoneDigits.length <= PHONE_DIGITS_MAX &&
+        form.telefonoPrefix.length > 0;
+    const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim());
 
     const handleProtocolo = (id: string) => {
         setForm((f) => ({ ...f, protocolo: id }));
         setTimeout(() => setStep(2), 280);
     };
 
-    const handleDimension = (id: string) => {
-        setForm((f) => ({ ...f, dimension: id }));
+    const handleFormatoExperiencia = (id: string) => {
+        setForm((f) => ({ ...f, formatoExperiencia: id }));
         setTimeout(() => setStep(3), 280);
     };
 
-    const handleStep3Next = () => {
-        if (form.fecha && form.zona) setStep(4);
+    const handleDimension = (id: string) => {
+        setForm((f) => ({ ...f, dimension: id }));
+        setTimeout(() => setStep(4), 280);
+    };
+
+    const handleStep4Next = () => {
+        if (form.fecha && form.zona) setStep(5);
     };
 
     const buildWhatsAppMessage = () => {
         const protocolo = protocoloOptions.find((p) => p.id === form.protocolo)?.label ?? '';
+        const formato = formatoExperienciaOptions.find((f) => f.id === form.formatoExperiencia)?.label ?? '';
         const dimension = dimensionOptions.find((d) => d.id === form.dimension)?.label ?? '';
         const msg = `Hola Fernando, me gustaría solicitar una propuesta para un evento.
 
 📋 Tipo de evento: ${protocolo}
+🍽 Formato: ${formato}
 👥 Dimensión: ${dimension}
 📅 Fecha aproximada: ${form.fecha}
 📍 Zona / Ciudad: ${form.zona}
@@ -88,17 +167,27 @@ export default function FormularioSection() {
 
     const buildWebhookPayload = () => {
         const protocoloLabel = protocoloOptions.find((p) => p.id === form.protocolo)?.label ?? '';
+        const formatoExperienciaLabel = formatoExperienciaOptions.find((f) => f.id === form.formatoExperiencia)?.label ?? '';
         const dimensionLabel = dimensionOptions.find((d) => d.id === form.dimension)?.label ?? '';
+        const fullPhone = formatPhoneForPayload(form.telefonoPrefix, form.telefono);
+        const { telefonoPrefix: _, ...rest } = form;
         return {
-            ...form,
+            ...rest,
+            telefono: fullPhone,
             protocoloLabel,
+            formatoExperienciaLabel,
             dimensionLabel,
             timestamp: new Date().toISOString(),
         };
     };
 
+    const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const digits = e.target.value.replace(/\D/g, '').slice(0, PHONE_DIGITS_MAX);
+        setForm((f) => ({ ...f, telefono: digits }));
+    };
+
     const handleSubmit = async () => {
-        if (!form.nombre || !form.telefono) return;
+        if (!form.nombre || !phoneValid || !emailValid) return;
         if (!N8N_WEBHOOK_URL) {
             setWebhookError('Webhook no configurado. Añade VITE_N8N_WEBHOOK_URL en .env');
             return;
@@ -209,7 +298,7 @@ export default function FormularioSection() {
                             {step === 1 && (
                                 <div className="animate-form-in">
                                     <p className="text-[11px] font-semibold tracking-[0.3em] uppercase text-teal mb-5">
-                                        Paso 1 de 4
+                                        Paso 1 de 5
                                     </p>
                                     <h3
                                         id="form-heading"
@@ -247,11 +336,53 @@ export default function FormularioSection() {
                                 </div>
                             )}
 
-                            {/* Step 2 — Dimensión */}
+                            {/* Step 2 — Formato de experiencia */}
                             {step === 2 && (
                                 <div className="animate-form-in">
                                     <p className="text-[11px] font-semibold tracking-[0.3em] uppercase text-teal mb-5">
-                                        Paso 2 de 4
+                                        Paso 2 de 5
+                                    </p>
+                                    <h3 className="font-display text-[clamp(1.4rem,2.5vw,1.9rem)] font-bold leading-[1.15] tracking-[-0.02em] text-charcoal mb-3">
+                                        ¿Qué formato de experiencia tiene en mente?
+                                    </h3>
+                                    <p className="text-sm font-light text-graphite mb-10">
+                                        Seleccione la propuesta que mejor se adapte a su convocatoria. Todas nuestras opciones incluyen elaboración in-situ y staff especializado.
+                                    </p>
+                                    <div className="flex flex-col gap-3">
+                                        {formatoExperienciaOptions.map((opt) => {
+                                            const Icon = opt.icon;
+                                            return (
+                                                <button
+                                                    key={opt.id}
+                                                    onClick={() => handleFormatoExperiencia(opt.id)}
+                                                    className={`group text-left flex items-center gap-5 px-6 py-5 rounded-xl border transition-all duration-300 ${form.formatoExperiencia === opt.id
+                                                        ? 'border-teal bg-teal/5'
+                                                        : 'border-bone hover:border-teal/40 hover:bg-teal/3'
+                                                        }`}
+                                                >
+                                                    <div className="flex-shrink-0 w-11 h-11 rounded-full bg-teal/8 flex items-center justify-center group-hover:bg-teal/15 transition-colors duration-300">
+                                                        <Icon size={22} weight="light" className="text-teal" />
+                                                    </div>
+                                                    <div>
+                                                        <p className="text-sm font-semibold tracking-[-0.01em] text-charcoal mb-0.5">
+                                                            {opt.label}
+                                                        </p>
+                                                        <p className="text-xs font-light text-stone leading-relaxed">
+                                                            {opt.sub}
+                                                        </p>
+                                                    </div>
+                                                </button>
+                                            );
+                                        })}
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* Step 3 — Dimensión */}
+                            {step === 3 && (
+                                <div className="animate-form-in">
+                                    <p className="text-[11px] font-semibold tracking-[0.3em] uppercase text-teal mb-5">
+                                        Paso 3 de 5
                                     </p>
                                     <h3 className="font-display text-[clamp(1.4rem,2.5vw,1.9rem)] font-bold leading-[1.15] tracking-[-0.02em] text-charcoal mb-10">
                                         Entendido. ¿Cuál es la dimensión aproximada del evento?
@@ -273,11 +404,11 @@ export default function FormularioSection() {
                                 </div>
                             )}
 
-                            {/* Step 3 — Fecha y zona */}
-                            {step === 3 && (
+                            {/* Step 4 — Fecha y zona */}
+                            {step === 4 && (
                                 <div className="animate-form-in">
                                     <p className="text-[11px] font-semibold tracking-[0.3em] uppercase text-teal mb-5">
-                                        Paso 3 de 4
+                                        Paso 4 de 5
                                     </p>
                                     <h3 className="font-display text-[clamp(1.4rem,2.5vw,1.9rem)] font-bold leading-[1.15] tracking-[-0.02em] text-charcoal mb-10">
                                         Perfecto. Para comprobar la disponibilidad de nuestra agenda y logística:
@@ -323,7 +454,7 @@ export default function FormularioSection() {
                                         </label>
                                     </div>
                                     <button
-                                        onClick={handleStep3Next}
+                                        onClick={handleStep4Next}
                                         disabled={!form.fecha || !form.zona}
                                         className="w-full py-4 rounded-xl bg-charcoal text-cream text-[13px] font-medium tracking-[0.08em] uppercase transition-all duration-300 hover:bg-teal disabled:opacity-30 disabled:cursor-not-allowed"
                                     >
@@ -332,11 +463,11 @@ export default function FormularioSection() {
                                 </div>
                             )}
 
-                            {/* Step 4 — Contacto */}
-                            {step === 4 && (
+                            {/* Step 5 — Contacto */}
+                            {step === 5 && (
                                 <div className="animate-form-in">
                                     <p className="text-[11px] font-semibold tracking-[0.3em] uppercase text-teal mb-5">
-                                        Paso 4 de 4
+                                        Paso 5 de 5
                                     </p>
                                     <h3 className="font-display text-[clamp(1.4rem,2.5vw,1.9rem)] font-bold leading-[1.15] tracking-[-0.02em] text-charcoal mb-3">
                                         Gracias. Fernando analizará estos datos personalmente.
@@ -347,7 +478,7 @@ export default function FormularioSection() {
                                     <div className="flex flex-col gap-4 mb-8">
                                         <label className="flex flex-col gap-2">
                                             <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-stone">
-                                                Nombre
+                                                Nombre & Apellidos
                                             </span>
                                             <input
                                                 type="text"
@@ -359,15 +490,53 @@ export default function FormularioSection() {
                                         </label>
                                         <label className="flex flex-col gap-2">
                                             <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-stone">
-                                                Teléfono (WhatsApp)
+                                                Celular (WhatsApp)
+                                            </span>
+                                            <div className="flex rounded-xl border border-bone bg-white overflow-hidden focus-within:border-teal focus-within:ring-1 focus-within:ring-teal transition-colors">
+                                                <select
+                                                    value={form.telefonoPrefix}
+                                                    onChange={(e) => setForm((f) => ({ ...f, telefonoPrefix: e.target.value }))}
+                                                    className="shrink-0 pl-3 pr-8 py-4 text-sm text-charcoal bg-bone/50 border-r border-bone focus:outline-none focus:ring-0 appearance-none cursor-pointer"
+                                                    style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7280' d='M6 8L1 3h10z'/%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 12px center' }}
+                                                    aria-label="Prefijo del país"
+                                                >
+                                                    {PHONE_PREFIXES.map((p) => (
+                                                        <option key={p.value} value={p.value}>
+                                                            {p.label}
+                                                        </option>
+                                                    ))}
+                                                </select>
+                                                <input
+                                                    type="tel"
+                                                    inputMode="numeric"
+                                                    autoComplete="tel-national"
+                                                    placeholder="612 345 678"
+                                                    value={formatPhoneDisplay(form.telefono)}
+                                                    onChange={handlePhoneChange}
+                                                    className="w-full px-4 py-4 text-sm text-charcoal placeholder-stone/60 focus:outline-none bg-transparent"
+                                                />
+                                            </div>
+                                            {form.telefono && !phoneValid && (
+                                                <p className="text-[11px] text-amber-700">
+                                                    Introduce entre {PHONE_DIGITS_MIN} y {PHONE_DIGITS_MAX} dígitos (sin prefijo).
+                                                </p>
+                                            )}
+                                        </label>
+                                        <label className="flex flex-col gap-2">
+                                            <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-stone">
+                                                Email
                                             </span>
                                             <input
-                                                type="tel"
-                                                placeholder="+34 600 000 000"
-                                                value={form.telefono}
-                                                onChange={(e) => setForm((f) => ({ ...f, telefono: e.target.value }))}
+                                                type="email"
+                                                autoComplete="email"
+                                                placeholder="correo@ejemplo.com"
+                                                value={form.email}
+                                                onChange={(e) => setForm((f) => ({ ...f, email: e.target.value.trim() }))}
                                                 className="w-full px-4 py-4 rounded-xl border border-bone bg-white text-sm text-charcoal placeholder-stone/60 focus:outline-none focus:border-teal transition-colors duration-200"
                                             />
+                                            {form.email && !emailValid && (
+                                                <p className="text-[11px] text-amber-700">Introduce un email válido.</p>
+                                            )}
                                         </label>
                                     </div>
                                     {sent ? (
@@ -389,9 +558,9 @@ export default function FormularioSection() {
                                             <button
                                                 type="button"
                                                 onClick={handleSubmit}
-                                                disabled={!form.nombre || !form.telefono || sending}
+                                                disabled={!form.nombre || !phoneValid || !emailValid || sending}
                                                 className="w-full flex items-center justify-center gap-3 py-5 rounded-xl bg-teal text-cream text-[13px] font-medium tracking-[0.08em] uppercase transition-all duration-500 hover:bg-teal-dark hover:shadow-[0_8px_40px_rgba(0,97,112,0.35)] disabled:pointer-events-none disabled:opacity-30"
-                                                aria-disabled={!form.nombre || !form.telefono || sending}
+                                                aria-disabled={!form.nombre || !phoneValid || !emailValid || sending}
                                             >
                                                 {sending ? 'Enviando…' : 'Enviar solicitud'}
                                             </button>
@@ -401,7 +570,11 @@ export default function FormularioSection() {
                                                 </p>
                                             )}
                                             <p className="text-[11px] font-light text-stone/60 text-center mt-4">
-                                                Los datos se envían a tu sistema (n8n). No se abre WhatsApp al enviar.
+                                                Al hacer clic en enviar, está de acuerdo con nuestra{' '}
+                                                <a href="/politica-privacidad" className="text-teal underline hover:text-teal-dark transition-colors" target="_blank" rel="noopener noreferrer">
+                                                    política de privacidad
+                                                </a>
+                                                .
                                             </p>
                                         </>
                                     )}
