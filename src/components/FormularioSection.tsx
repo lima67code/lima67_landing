@@ -1,6 +1,11 @@
 import { useState } from 'react';
 import { WhatsappLogo, Buildings, Briefcase, Champagne, CalendarBlank, MapPin, ArrowLeft } from '@phosphor-icons/react';
 
+// En desarrollo usamos proxy (mismo origen) para evitar CORS con n8n
+const N8N_WEBHOOK_URL = import.meta.env.DEV
+    ? '/api/n8n-webhook'
+    : (import.meta.env.VITE_N8N_WEBHOOK_URL as string | undefined);
+
 type FormData = {
     protocolo: string;
     dimension: string;
@@ -42,6 +47,9 @@ const stepLabels = ['Contexto', 'Dimensión', 'Disponibilidad', 'Contacto'];
 
 export default function FormularioSection() {
     const [step, setStep] = useState(1);
+    const [sending, setSending] = useState(false);
+    const [webhookError, setWebhookError] = useState<string | null>(null);
+    const [sent, setSent] = useState(false);
     const [form, setForm] = useState<FormData>({
         protocolo: '',
         dimension: '',
@@ -76,6 +84,43 @@ export default function FormularioSection() {
 📍 Zona / Ciudad: ${form.zona}
 👤 Nombre: ${form.nombre}`;
         return `https://wa.me/34613510777?text=${encodeURIComponent(msg)}`;
+    };
+
+    const buildWebhookPayload = () => {
+        const protocoloLabel = protocoloOptions.find((p) => p.id === form.protocolo)?.label ?? '';
+        const dimensionLabel = dimensionOptions.find((d) => d.id === form.dimension)?.label ?? '';
+        return {
+            ...form,
+            protocoloLabel,
+            dimensionLabel,
+            timestamp: new Date().toISOString(),
+        };
+    };
+
+    const handleSubmit = async () => {
+        if (!form.nombre || !form.telefono) return;
+        if (!N8N_WEBHOOK_URL) {
+            setWebhookError('Webhook no configurado. Añade VITE_N8N_WEBHOOK_URL en .env');
+            return;
+        }
+        setWebhookError(null);
+        setSent(false);
+        setSending(true);
+
+        try {
+            const res = await fetch(N8N_WEBHOOK_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(buildWebhookPayload()),
+            });
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            setSent(true);
+        } catch (e) {
+            const msg = e instanceof Error ? e.message : 'Error de conexión';
+            setWebhookError(`No se pudo enviar la solicitud (${msg}). Comprueba la URL del webhook en .env y que el workflow de n8n esté activo.`);
+        } finally {
+            setSending(false);
+        }
     };
 
     return (
@@ -325,20 +370,41 @@ export default function FormularioSection() {
                                             />
                                         </label>
                                     </div>
-                                    <a
-                                        href={buildWhatsAppMessage()}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className={`w-full flex items-center justify-center gap-3 py-5 rounded-xl bg-teal text-cream text-[13px] font-medium tracking-[0.08em] uppercase transition-all duration-500 hover:bg-teal-dark hover:shadow-[0_8px_40px_rgba(0,97,112,0.35)] ${!form.nombre || !form.telefono ? 'pointer-events-none opacity-30' : ''
-                                            }`}
-                                        aria-disabled={!form.nombre || !form.telefono}
-                                    >
-                                        <WhatsappLogo size={20} weight="fill" />
-                                        Solicitar Propuesta vía WhatsApp
-                                    </a>
-                                    <p className="text-[11px] font-light text-stone/60 text-center mt-4">
-                                        Sus datos se envían directamente por WhatsApp. Sin formularios, sin esperas.
-                                    </p>
+                                    {sent ? (
+                                        <div className="rounded-xl border border-teal/30 bg-teal/5 p-6 text-center">
+                                            <p className="text-sm font-medium text-teal mb-2">Solicitud enviada correctamente</p>
+                                            <p className="text-[11px] text-stone/80 mb-4">Nos pondremos en contacto contigo a la mayor brevedad.</p>
+                                            <a
+                                                href={buildWhatsAppMessage()}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="inline-flex items-center justify-center gap-2 py-3 px-5 rounded-lg bg-teal text-cream text-[12px] font-medium hover:bg-teal-dark transition-colors"
+                                            >
+                                                <WhatsappLogo size={18} weight="fill" />
+                                                Abrir WhatsApp por si quieres escribir
+                                            </a>
+                                        </div>
+                                    ) : (
+                                        <>
+                                            <button
+                                                type="button"
+                                                onClick={handleSubmit}
+                                                disabled={!form.nombre || !form.telefono || sending}
+                                                className="w-full flex items-center justify-center gap-3 py-5 rounded-xl bg-teal text-cream text-[13px] font-medium tracking-[0.08em] uppercase transition-all duration-500 hover:bg-teal-dark hover:shadow-[0_8px_40px_rgba(0,97,112,0.35)] disabled:pointer-events-none disabled:opacity-30"
+                                                aria-disabled={!form.nombre || !form.telefono || sending}
+                                            >
+                                                {sending ? 'Enviando…' : 'Enviar solicitud'}
+                                            </button>
+                                            {webhookError && (
+                                                <p className="text-[11px] text-amber-700 text-center mt-2" role="alert">
+                                                    {webhookError}
+                                                </p>
+                                            )}
+                                            <p className="text-[11px] font-light text-stone/60 text-center mt-4">
+                                                Los datos se envían a tu sistema (n8n). No se abre WhatsApp al enviar.
+                                            </p>
+                                        </>
+                                    )}
                                 </div>
                             )}
                         </div>{/* end step content */}

@@ -1,6 +1,7 @@
-import { lazy, Suspense } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { lazy, Suspense, useEffect } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
 
+import { initGoogleAnalytics, sendPageView } from './analytics';
 import HomePage from './pages/HomePage';
 
 const AvisoLegal = lazy(() => import('./pages/AvisoLegal'));
@@ -8,6 +9,16 @@ const PoliticaPrivacidad = lazy(() => import('./pages/PoliticaPrivacidad'));
 const PoliticaCookies = lazy(() => import('./pages/PoliticaCookies'));
 
 function App() {
+  const location = useLocation();
+
+  useEffect(() => {
+    initGoogleAnalytics();
+  }, []);
+
+  useEffect(() => {
+    sendPageView(location.pathname || '/', document.title);
+  }, [location.pathname]);
+
   return (
     <Suspense fallback={
       <div className="min-h-screen bg-cream flex items-center justify-center" aria-live="polite">
