@@ -76,14 +76,13 @@ export default function ImagePanel() {
         {marqueeImages.map((img, i) => (
           <div
             key={i}
-            className="flex-shrink-0 rounded-xl overflow-hidden"
-            style={{ width: 450, height: 500 }}
+            className="flex-shrink-0 rounded-xl overflow-hidden w-[280px] h-[300px] md:w-[600px] md:h-[650px]"
           >
             <img
               src={img.src}
               alt={img.alt}
-              width={450}
-              height={500}
+              width={400}
+              height={550}
               className="w-full h-full object-cover"
               loading={i < 3 ? 'eager' : 'lazy'}
               draggable={false}

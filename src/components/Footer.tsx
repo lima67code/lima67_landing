@@ -4,13 +4,28 @@ import Logo from './Logo';
 
 export default function Footer() {
   return (
-    <footer className="bg-charcoal border-t border-white/5 py-16 md:py-20 px-6 md:px-12" role="contentinfo">
-      <div className="max-w-[1400px] mx-auto">
+    <footer className="relative overflow-hidden bg-charcoal border-t border-white/5 py-16 md:py-20 px-6 md:px-12" role="contentinfo">
+      {/* Watermark */}
+      <div
+        className="pointer-events-none select-none absolute bottom-[-5%] right-[0%] w-[80%] md:w-[50%] opacity-[0.03] z-0"
+        aria-hidden="true"
+      >
+        <img
+          src="/logo/LIMA67-solo.svg"
+          alt=""
+          className="w-full h-auto"
+          draggable={false}
+          style={{
+            filter: 'brightness(0) saturate(100%) invert(62%) sepia(40%) saturate(600%) hue-rotate(5deg) brightness(88%)',
+          }}
+        />
+      </div>
+      <div className="relative z-10 max-w-[1400px] mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8 mb-16">
           {/* Brand */}
           <div className="md:col-span-2">
             <div className="mb-6">
-              <Logo variant="light" size="md" />
+              <Logo variant="light" size="lg" />
             </div>
             <p className="text-sm font-light text-sand/70 leading-relaxed max-w-[340px]">
               La ejecución de un restaurante de lujo, en el escenario que tú elijas. Alta

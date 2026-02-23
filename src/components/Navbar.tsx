@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { List, X } from '@phosphor-icons/react';
+import { List, X, ArrowRight } from '@phosphor-icons/react';
 import Logo from './Logo';
 
 export default function Navbar() {
@@ -49,7 +49,7 @@ export default function Navbar() {
             <li key={link.href}>
               <a
                 href={link.href}
-                className="text-[13px] font-medium tracking-[0.08em] uppercase text-graphite hover:text-charcoal transition-colors duration-300 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-forest after:transition-all after:duration-300 hover:after:w-full"
+                className="text-[13px] font-medium tracking-[0.08em] uppercase text-graphite hover:text-charcoal transition-colors duration-300 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-gold after:transition-all after:duration-300 hover:after:w-full"
               >
                 {link.label}
               </a>
@@ -58,9 +58,14 @@ export default function Navbar() {
           <li>
             <a
               href="#formulario"
-              className="inline-flex items-center gap-2 bg-teal text-cream text-[13px] font-medium tracking-[0.05em] uppercase px-6 py-3 rounded-full hover:bg-teal-dark transition-colors duration-300"
+              className="group inline-flex items-center gap-2 bg-gold text-cream text-[13px] font-medium tracking-[0.05em] uppercase px-6 py-3 rounded-full hover:bg-gold-dark transition-colors duration-300"
             >
               Solicitar Propuesta
+              <ArrowRight
+                size={14}
+                weight="bold"
+                className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"
+              />
             </a>
           </li>
         </ul>
@@ -90,7 +95,7 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               onClick={() => setMenuOpen(false)}
-              className="text-2xl font-light tracking-[0.1em] uppercase text-charcoal hover:text-forest transition-colors"
+              className="text-2xl font-light tracking-[0.1em] uppercase text-charcoal hover:text-gold transition-colors"
             >
               {link.label}
             </a>
@@ -98,9 +103,14 @@ export default function Navbar() {
           <a
             href="#formulario"
             onClick={() => setMenuOpen(false)}
-            className="inline-flex items-center gap-3 bg-teal text-cream text-base font-medium tracking-[0.05em] uppercase px-8 py-4 rounded-full mt-4"
+            className="group inline-flex items-center gap-3 bg-gold text-cream text-base font-medium tracking-[0.05em] uppercase px-8 py-4 rounded-full mt-4"
           >
             Solicitar Propuesta
+            <ArrowRight
+              size={16}
+              weight="bold"
+              className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"
+            />
           </a>
         </div>
       </nav>

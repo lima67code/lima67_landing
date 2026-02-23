@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Buildings, Briefcase, Champagne, CalendarBlank, MapPin, ArrowLeft, CookingPot, Wine, Package, ForkKnife, Users } from '@phosphor-icons/react';
 
 // En desarrollo usamos proxy (mismo origen) para evitar CORS con n8n
@@ -118,6 +118,7 @@ export default function FormularioSection() {
     const [sending, setSending] = useState(false);
     const [webhookError, setWebhookError] = useState<string | null>(null);
     const [sent, setSent] = useState(false);
+    const dateInputRef = useRef<HTMLInputElement>(null);
     const [form, setForm] = useState<FormData>({
         protocolo: '',
         formatoExperiencia: '',
@@ -224,15 +225,28 @@ export default function FormularioSection() {
                     <div className="absolute inset-0 bg-charcoal/55" />
                     {/* Overlay content */}
                     <div className="absolute inset-0 flex flex-col justify-end p-14">
-                        <h2 className="font-display text-[clamp(1.6rem,2.8vw,2.4rem)] font-bold leading-[1.1] tracking-[-0.02em] text-cream max-w-[420px]">
+                        <h2 className="font-display text-[clamp(1.6rem,2.8vw,2.4rem)] font-bold leading-[1.1] tracking-[-0.02em] text-cream max-w-[420px] mb-8">
                             Cada evento merece una propuesta a su medida.
                         </h2>
+                        {/* Trust signals */}
+                        <ul className="flex flex-col gap-3">
+                            {[
+                                'Respuesta en menos de 24 h',
+                                'Propuesta 100% personalizada',
+                                'Sin compromiso, sin letra pequeña',
+                            ].map((item) => (
+                                <li key={item} className="flex items-center gap-3 text-sm font-regular text-cream/80">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0" />
+                                    {item}
+                                </li>
+                            ))}
+                        </ul>
                     </div>
                 </div>
 
                 {/* Right — form */}
                 <div className="flex-1 flex flex-col bg-cream px-8 md:px-16 py-12 md:py-14">
-                    <div className="max-w-[480px] w-full mx-auto flex flex-col h-full">
+                    <div className="max-w-[500px] w-full mx-auto flex flex-col h-full">
 
                         {/* Back button — above the stepper */}
                         <div className="mb-4 h-6">
@@ -336,32 +350,27 @@ export default function FormularioSection() {
                                     <h3 className="font-display text-[clamp(1.4rem,2.5vw,1.9rem)] font-bold leading-[1.15] tracking-[-0.02em] text-charcoal mb-3">
                                         ¿Qué formato de experiencia tiene en mente?
                                     </h3>
-                                    <p className="text-sm font-light text-graphite mb-10">
-                                        Seleccione la propuesta que mejor se adapte a su convocatoria. Todas nuestras opciones incluyen elaboración in-situ y staff especializado.
+                                    <p className="text-sm font-light text-graphite mb-6">
+                                        Seleccione la propuesta que mejor se adapte a su convocatoria.
                                     </p>
-                                    <div className="flex flex-col gap-3">
+                                    <div className="grid grid-cols-2 gap-2">
                                         {formatoExperienciaOptions.map((opt) => {
                                             const Icon = opt.icon;
                                             return (
                                                 <button
                                                     key={opt.id}
                                                     onClick={() => handleFormatoExperiencia(opt.id)}
-                                                    className={`group text-left flex items-center gap-5 px-6 py-5 rounded-xl border transition-all duration-300 ${form.formatoExperiencia === opt.id
+                                                    className={`group text-left flex items-center gap-3 px-4 py-3 rounded-xl border transition-all duration-300 ${form.formatoExperiencia === opt.id
                                                         ? 'border-teal bg-teal/5'
                                                         : 'border-bone hover:border-teal/40 hover:bg-teal/3'
                                                         }`}
                                                 >
-                                                    <div className="flex-shrink-0 w-11 h-11 rounded-full bg-teal/8 flex items-center justify-center group-hover:bg-teal/15 transition-colors duration-300">
-                                                        <Icon size={22} weight="light" className="text-teal" />
+                                                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-teal/8 flex items-center justify-center group-hover:bg-teal/15 transition-colors duration-300">
+                                                        <Icon size={16} weight="light" className="text-teal" />
                                                     </div>
-                                                    <div>
-                                                        <p className="text-sm font-semibold tracking-[-0.01em] text-charcoal mb-0.5">
-                                                            {opt.label}
-                                                        </p>
-                                                        <p className="text-xs font-light text-stone leading-relaxed">
-                                                            {opt.sub}
-                                                        </p>
-                                                    </div>
+                                                    <p className="text-sm font-medium tracking-[-0.01em] text-charcoal leading-tight">
+                                                        {opt.label}
+                                                    </p>
                                                 </button>
                                             );
                                         })}
@@ -413,9 +422,11 @@ export default function FormularioSection() {
                                                 <CalendarBlank
                                                     size={16}
                                                     weight="light"
-                                                    className="absolute left-4 top-1/2 -translate-y-1/2 text-stone pointer-events-none z-10"
+                                                    className="absolute left-4 top-1/2 -translate-y-1/2 text-stone cursor-pointer z-10"
+                                                    onClick={() => dateInputRef.current?.showPicker()}
                                                 />
                                                 <input
+                                                    ref={dateInputRef}
                                                     type="date"
                                                     min={new Date().toISOString().slice(0, 10)}
                                                     value={form.fecha}
@@ -543,7 +554,7 @@ export default function FormularioSection() {
                                                 type="button"
                                                 onClick={handleSubmit}
                                                 disabled={!form.nombre || !phoneValid || !emailValid || sending}
-                                                className="w-full flex items-center justify-center gap-3 py-5 rounded-xl bg-teal text-cream text-[13px] font-medium tracking-[0.08em] uppercase transition-all duration-500 hover:bg-teal-dark hover:shadow-[0_8px_40px_rgba(0,97,112,0.35)] disabled:pointer-events-none disabled:opacity-30"
+                                                className="w-full flex items-center justify-center gap-3 py-5 rounded-xl bg-teal text-cream text-[13px] font-medium tracking-[0.08em] uppercase transition-all duration-500 hover:bg-teal-dark hover:shadow-[0_8px_40px_rgba(182,141,60,0.35)] disabled:pointer-events-none disabled:opacity-30"
                                                 aria-disabled={!form.nombre || !phoneValid || !emailValid || sending}
                                             >
                                                 {sending ? 'Enviando…' : 'Enviar solicitud'}

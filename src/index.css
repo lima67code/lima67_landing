@@ -1,23 +1,48 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'Villagers';
+  src: url('/fonts/Villagers-Grunge.woff2') format('woff2'),
+    url('/fonts/Villagers-Grunge.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
+  /* — Crema & neutros (se mantienen) — */
   --color-cream: #FAF8F5;
   --color-cream-dark: #F0EDE8;
-  --color-forest: #447a5d;
-  --color-forest-light: #5a9474;
-  --color-forest-dark: #366348;
-  --color-teal: #006170;
-  --color-teal-light: #0d7d8e;
-  --color-teal-dark: #004d5a;
-  --color-charcoal: #1A1A1A;
-  --color-charcoal-light: #2C2C2C;
-  --color-graphite: #4A4A4A;
   --color-stone: #8A8680;
   --color-sand: #C4BFB6;
   --color-bone: #E8E4DE;
 
+  /* — Dorado principal — */
+  --color-gold: #B68D3C;
+  --color-gold-light: #D4A853;
+  --color-gold-dark: #8C6A28;
+
+  /* — Terracota (raíz peruana) — */
+  --color-terracotta: #8B3A2A;
+  --color-terracotta-soft: #C4614E;
+
+  /* — Oscuros cálidos — */
+  --color-charcoal: #1A1410;
+  --color-charcoal-light: #2C2319;
+  --color-graphite: #4A3F35;
+  --color-obsidian: #0F0C08;
+
+  /* — Aliases para compatibilidad con clases existentes — */
+  --color-teal: #B68D3C;
+  --color-teal-light: #D4A853;
+  --color-teal-dark: #8C6A28;
+  --color-forest: #B68D3C;
+  --color-forest-light: #D4A853;
+  --color-forest-dark: #8C6A28;
+
   --font-display: 'Montserrat', sans-serif;
   --font-body: 'Montserrat', sans-serif;
+  --font-villagers: 'Villagers', serif;
 }
 
 :root {
@@ -49,6 +74,10 @@ body {
   margin: 0;
   font-family: var(--font-body);
   background-color: var(--color-cream);
+  /* Subtle warm linen texture */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)' opacity='0.04'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
   color: var(--color-charcoal);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -56,7 +85,7 @@ body {
 }
 
 ::selection {
-  background-color: var(--color-forest);
+  background-color: var(--color-gold);
   color: var(--color-cream);
 }
 
@@ -134,7 +163,7 @@ body {
 }
 
 *:focus-visible {
-  outline: 2px solid var(--color-teal);
+  outline: 2px solid var(--color-gold);
   outline-offset: 4px;
   border-radius: 2px;
 }
@@ -158,7 +187,8 @@ body {
 
 .hr-accent {
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--color-sand), transparent);
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+  opacity: 0.4;
 }
 
 .card-lift {
@@ -187,4 +217,9 @@ body {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-repeat: repeat;
   background-size: 256px 256px;
+}
+
+/* Hide native browser calendar icon on date inputs */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
 }

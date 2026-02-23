@@ -92,7 +92,7 @@ export default function Services() {
     >
       {/* Header */}
       <div data-heading className="max-w-[740px] mb-20">
-        <p className="text-[11px] font-semibold tracking-[0.35em] uppercase text-forest mb-5">
+        <p className="text-[11px] font-semibold tracking-[0.35em] uppercase text-gold mb-5">
           Nuestros servicios
         </p>
         <h2

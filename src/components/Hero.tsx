@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { CaretDown } from '@phosphor-icons/react';
+import { CaretDown, ArrowRight } from '@phosphor-icons/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import ImagePanel from './ImagePanel';
@@ -87,7 +87,10 @@ export default function Hero() {
           ref={headlineRef}
           className="font-display text-[clamp(2.2rem,5.5vw,4.2rem)] font-bold leading-[1.08] tracking-[-0.02em] text-charcoal mb-8"
         >
-          Alta <span className="text-teal italic font-bold">cocina peruana</span> de autor, diseñada para la dimensión de su evento.
+          Alta <span
+            className="text-gold"
+            style={{ fontFamily: 'var(--font-villagers)', textTransform: 'uppercase', letterSpacing: '0.1em' }}
+          >Cocina Peruana</span> de autor, diseñada para la dimensión de su evento
         </h1>
 
         <p
@@ -100,9 +103,14 @@ export default function Hero() {
         <div ref={ctaRef}>
           <a
             href="#formulario"
-            className="group inline-flex items-center gap-3 bg-teal text-cream text-[13px] font-medium tracking-[0.08em] uppercase px-10 py-4 rounded-full hover:bg-teal-dark transition-all duration-500 hover:shadow-[0_8px_40px_rgba(0,97,112,0.35)]"
+            className="group inline-flex items-center gap-3 bg-gold text-cream text-[13px] font-medium tracking-[0.08em] uppercase px-10 py-4 rounded-full hover:bg-gold-dark transition-all duration-500 hover:shadow-[0_8px_40px_rgba(182,141,60,0.4)]"
           >
-            Solicitar Propuesta
+            Solicitar Presupuesto
+            <ArrowRight
+              size={15}
+              weight="bold"
+              className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"
+            />
           </a>
         </div>
       </div>

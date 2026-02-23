@@ -32,7 +32,7 @@ export default function Pillars() {
     const el = sectionRef.current;
     if (!el) return;
 
-    // Heading
+    // Heading reveal
     const heading = el.querySelector('[data-heading]');
     if (heading) {
       gsap.fromTo(
@@ -48,9 +48,10 @@ export default function Pillars() {
       );
     }
 
-    // Pillar cards with stagger
-    const cards = el.querySelectorAll('[data-pillar]');
+    // Pillar cards
+    const cards = el.querySelectorAll<HTMLElement>('[data-pillar]');
     cards.forEach((card, i) => {
+      // Scroll reveal
       gsap.fromTo(
         card,
         { opacity: 0, y: 80, scale: 0.95 },
@@ -79,6 +80,49 @@ export default function Pillars() {
           },
         });
       }
+
+      // GSAP hover — smooth height + opacity on subtitle
+      // Only on non-touch (md+)
+      const subtitle = card.querySelector<HTMLElement>('[data-subtitle]');
+      if (!subtitle || window.matchMedia('(max-width: 767px)').matches) return;
+
+      // Set initial state: hidden with no height
+      gsap.set(subtitle, { height: 0, opacity: 0, overflow: 'hidden' });
+
+      const enterTween = gsap.to(subtitle, {
+        height: 'auto',
+        opacity: 1,
+        duration: 0.65,
+        ease: 'power3.out',
+        paused: true,
+      });
+
+      const leaveTween = gsap.to(subtitle, {
+        height: 0,
+        opacity: 0,
+        duration: 0.5,
+        ease: 'power3.inOut',
+        paused: true,
+      });
+
+      const onEnter = () => {
+        leaveTween.pause();
+        enterTween.invalidate().restart();
+      };
+
+      const onLeave = () => {
+        enterTween.pause();
+        leaveTween.invalidate().restart();
+      };
+
+      card.addEventListener('mouseenter', onEnter);
+      card.addEventListener('mouseleave', onLeave);
+
+      // Cleanup
+      return () => {
+        card.removeEventListener('mouseenter', onEnter);
+        card.removeEventListener('mouseleave', onLeave);
+      };
     });
   }, []);
 
@@ -92,7 +136,7 @@ export default function Pillars() {
       <div className="max-w-[1400px] mx-auto px-6 md:px-12">
         {/* Header */}
         <div data-heading className="max-w-[740px] mx-auto text-center mb-20">
-          <p className="text-[11px] font-semibold tracking-[0.35em] uppercase text-forest-light mb-5">
+          <p className="text-[11px] font-semibold tracking-[0.35em] uppercase text-gold-light mb-5">
             Nuestro proceso
           </p>
           <h2
@@ -116,7 +160,7 @@ export default function Pillars() {
               className="group relative aspect-[3/4] rounded-xl overflow-hidden cursor-default transform-gpu"
               role="listitem"
             >
-              {/* Image — contained in its own overflow-hidden div to prevent parallax bleed */}
+              {/* Image */}
               <div className="absolute inset-0 overflow-hidden">
                 <img
                   src={pillar.image}
@@ -133,12 +177,16 @@ export default function Pillars() {
 
               {/* Content */}
               <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 z-10">
-                {/* Accent line — teal on hover como detalle de marca */}
-                <div className="w-8 h-[1px] bg-cream/40 mb-4 transition-all duration-500 group-hover:w-12 group-hover:bg-teal-light" />
+                {/* Accent line */}
+                <div className="w-8 h-[1px] bg-cream/40 mb-4 transition-all duration-500 group-hover:w-12 group-hover:bg-gold" />
                 <h3 className="font-display text-xl md:text-2xl font-bold tracking-[0.03em] uppercase text-cream mb-2 leading-tight">
                   {pillar.title}
                 </h3>
-                <p className="text-sm font-light text-cream/70 leading-relaxed opacity-100 translate-y-0 md:opacity-0 md:translate-y-2 md:group-hover:opacity-100 md:group-hover:translate-y-0 transition-all duration-500">
+                {/* Subtitle: always visible on mobile, GSAP-animated on desktop */}
+                <p
+                  data-subtitle
+                  className="text-sm font-light text-cream/70 leading-relaxed"
+                >
                   {pillar.subtitle}
                 </p>
               </div>
