@@ -353,7 +353,7 @@ export default function FormularioSection() {
                                     <p className="text-sm font-light text-graphite mb-6">
                                         Seleccione la propuesta que mejor se adapte a su convocatoria.
                                     </p>
-                                    <div className="grid grid-cols-2 gap-2">
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                                         {formatoExperienciaOptions.map((opt) => {
                                             const Icon = opt.icon;
                                             return (
@@ -414,11 +414,11 @@ export default function FormularioSection() {
                                         Perfecto. Para comprobar la disponibilidad de nuestra agenda y logística:
                                     </h3>
                                     <div className="flex flex-col gap-4 mb-8">
-                                        <label className="flex flex-col gap-2">
-                                            <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-stone">
+                                        <label className="flex flex-col gap-2 min-w-0">
+                                            <span className="text-[11px] font-semibold tracking-[0.1em] uppercase text-stone truncate">
                                                 Fecha del evento
                                             </span>
-                                            <div className="relative">
+                                            <div className="relative overflow-hidden">
                                                 <CalendarBlank
                                                     size={16}
                                                     weight="light"
@@ -431,12 +431,12 @@ export default function FormularioSection() {
                                                     min={new Date().toISOString().slice(0, 10)}
                                                     value={form.fecha}
                                                     onChange={(e) => setForm((f) => ({ ...f, fecha: e.target.value }))}
-                                                    className="w-full pl-11 pr-4 py-4 rounded-xl border border-bone bg-white text-sm text-charcoal focus:outline-none focus:border-teal transition-colors duration-200 [color-scheme:light]"
+                                                    className="w-full min-w-0 pl-11 pr-4 py-4 rounded-xl border border-bone bg-white text-sm text-charcoal focus:outline-none focus:border-teal transition-colors duration-200 [color-scheme:light]"
                                                 />
                                             </div>
                                         </label>
-                                        <label className="flex flex-col gap-2">
-                                            <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-stone">
+                                        <label className="flex flex-col gap-2 min-w-0">
+                                            <span className="text-[11px] font-semibold tracking-[0.1em] uppercase text-stone truncate">
                                                 Zona o Ciudad
                                             </span>
                                             <div className="relative">
@@ -472,11 +472,8 @@ export default function FormularioSection() {
                                         Paso 5 de 5
                                     </p>
                                     <h3 className="font-display text-[clamp(1.4rem,2.5vw,1.9rem)] font-bold leading-[1.15] tracking-[-0.02em] text-charcoal mb-3">
-                                        Gracias. Analizaremos estos datos personalmente.
+                                        Gracias. ¿A quién debemos dirigir la propuesta inicial?
                                     </h3>
-                                    <p className="text-sm font-light text-graphite mb-10">
-                                        ¿A quién debemos dirigir la propuesta inicial?
-                                    </p>
                                     <div className="flex flex-col gap-4 mb-8">
                                         <label className="flex flex-col gap-2">
                                             <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-stone">

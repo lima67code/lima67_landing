@@ -120,17 +120,7 @@ export default function Hero() {
         <ImagePanel />
       </div>
 
-      {/* Scroll indicator */}
-      <div
-        ref={scrollRef}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-scroll-pulse"
-        aria-hidden="true"
-      >
-        <span className="text-[10px] font-medium tracking-[0.2em] uppercase text-stone">
-          Descubre más
-        </span>
-        <CaretDown size={16} weight="light" className="text-stone" />
-      </div>
+
     </section>
   );
 }

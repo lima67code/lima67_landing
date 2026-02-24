@@ -83,7 +83,7 @@ export default function Footer() {
                   to="/politica-cookies"
                   className="text-sm font-light text-sand/60 hover:text-cream transition-colors duration-300"
                 >
-                  Cookies
+                  Política de Cookies
                 </Link>
               </li>
             </ul>
