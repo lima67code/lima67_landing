@@ -9,11 +9,11 @@ export default function PoliticaPrivacidad() {
 
       <h2>1. Responsable del tratamiento</h2>
       <p>
-        <strong>Identidad:</strong> Lima67 Catering & Eventos<br />
-        <strong>NIF/CIF:</strong> [COMPLETAR]<br />
-        <strong>Dirección:</strong> [COMPLETAR]<br />
-        <strong>Correo electrónico:</strong> [COMPLETAR]<br />
-        <strong>Teléfono:</strong> +34 613 510 777
+        <strong>Identidad:</strong> Whitney Solanyee Arquiñigo Pozo<br />
+        <strong>NIE:</strong> Z0514095G<br />
+        <strong>Dirección:</strong> Calle Alicante 13, 1 E, 28100 Madrid<br />
+        <strong>Correo electrónico:</strong> administracion@lima67.com<br />
+        <strong>Teléfono:</strong> +34 631 37 98 40
       </p>
 
       <h2>2. Finalidad del tratamiento</h2>

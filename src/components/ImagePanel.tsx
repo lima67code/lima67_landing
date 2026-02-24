@@ -12,6 +12,9 @@ const images = [
   { src: '/images_marquee/personal.webp', alt: 'Equipo Lima67' },
   { src: '/images_marquee/pisco_botella.webp', alt: 'Botella de pisco' },
   { src: '/images_marquee/trabajadora.webp', alt: 'Trabajadora Lima67' },
+  // Pulpo: juntos en el marquee; pulpoman muestra la parte inferior
+  { src: '/images_marquee/pulpodish.webp', alt: 'Plato de pulpo Lima67' },
+  { src: '/images_marquee/pulpoman.webp', alt: 'Pulpo al estilo Lima67', objectPosition: 'bottom' as const },
 ];
 
 // Duplicate the array to create seamless infinite loop
@@ -84,6 +87,7 @@ export default function ImagePanel() {
               width={400}
               height={550}
               className="w-full h-full object-cover"
+              style={img.objectPosition ? { objectPosition: img.objectPosition } : undefined}
               loading={i < 3 ? 'eager' : 'lazy'}
               draggable={false}
             />

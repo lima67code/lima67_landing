@@ -12,8 +12,8 @@ const services = [
     tag: 'B2G',
     icon: Buildings,
     description:
-      'Protocolo de excelencia y saberes de origen para recepciones diplomáticas donde la imagen de su institución es la prioridad.',
-    image: '/images_marquee/catering.webp',
+      'Protocolo de excelencia y sabores de origen para recepciones diplomáticas en las que la imagen de su institución es prioritaria.',
+    image: '/images/institucional.webp',
     alt: 'Recepción diplomática con servicio de protocolo',
   },
   {
@@ -33,7 +33,7 @@ const services = [
     icon: Crown,
     description:
       'La intimidad de su residencia convertida en un restaurante de lujo con servicio exclusivo y platos de firma con herencia peruana.',
-    image: '/images/privado2.webp',
+    image: '/images/evento_privado.webp',
     alt: 'Evento privado exclusivo en residencia de lujo',
   },
 ];

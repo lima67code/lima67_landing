@@ -75,7 +75,7 @@ export default function Footer() {
                   to="/politica-privacidad"
                   className="text-sm font-light text-sand/60 hover:text-cream transition-colors duration-300"
                 >
-                  Privacidad
+                  Política de Privacidad
                 </Link>
               </li>
               <li>
@@ -110,11 +110,19 @@ export default function Footer() {
 
         {/* Bottom */}
         <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-[11px] font-light text-sand/30 tracking-[0.05em]">
+          <p className="text-[11px] font-light text-sand/50 tracking-[0.05em]">
             &copy; {new Date().getFullYear()} Lima67 Catering & Eventos. Todos los derechos reservados.
           </p>
-          <p className="text-[11px] font-light text-sand/20 tracking-[0.05em]">
-            Diseñado por Vrads
+          <p className="text-[12px] font-light text-sand/50 tracking-[0.05em]">
+            Diseñado por{' '}
+            <a
+              href="https://www.vradis.es/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sand/70 hover:text-cream transition-colors duration-300"
+            >
+              Vrads
+            </a>
           </p>
         </div>
       </div>

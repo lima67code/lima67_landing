@@ -89,7 +89,7 @@ export default function WhyUs() {
       {/* Watermark logo — derecha */}
       <div
         data-watermark
-        className="pointer-events-none select-none absolute bottom-[-5%] right-[0%] w-[80%] md:w-[55%] opacity-[0.12]"
+        className="pointer-events-none select-none absolute bottom-[-5%] right-[0%] w-[80%] md:w-[55%] opacity-[0.05]"
         aria-hidden="true"
       >
         <img

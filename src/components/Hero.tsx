@@ -69,7 +69,7 @@ export default function Hero() {
       {/* Background image with overlay */}
       <div ref={imgRef} className="absolute inset-0 -top-[10%] -bottom-[10%]">
         <img
-          src="/images/corporativo.webp"
+          src="/images/hero_bg.webp"
           alt="Ambiente de catering de alta cocina peruana en evento"
           width={1920}
           height={1080}

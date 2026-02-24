@@ -541,9 +541,31 @@ export default function FormularioSection() {
                                     {sent ? (
                                         <div className="rounded-xl border border-teal/30 bg-teal/5 p-6 text-center">
                                             <p className="text-sm font-medium text-teal mb-2">Solicitud enviada correctamente</p>
-                                            <p className="text-sm font-light text-charcoal">
+                                            <p className="text-sm font-light text-charcoal mb-6">
                                                 Te llamaremos hoy mismo o en un máximo de 24 horas al número que nos has indicado.
                                             </p>
+                                            <button
+                                                type="button"
+                                                onClick={() => {
+                                                    setSent(false);
+                                                    setStep(1);
+                                                    setWebhookError(null);
+                                                    setForm({
+                                                        protocolo: '',
+                                                        formatoExperiencia: '',
+                                                        dimension: '',
+                                                        fecha: '',
+                                                        zona: '',
+                                                        nombre: '',
+                                                        telefonoPrefix: '+34',
+                                                        telefono: '',
+                                                        email: '',
+                                                    });
+                                                }}
+                                                className="text-[11px] font-semibold tracking-[0.15em] uppercase text-teal border border-teal/40 rounded-full px-6 py-2.5 hover:bg-teal hover:text-cream transition-all duration-300"
+                                            >
+                                                Enviar otra solicitud
+                                            </button>
                                         </div>
                                     ) : (
                                         <>
