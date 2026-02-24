@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { CaretDown, ArrowRight } from '@phosphor-icons/react';
+import { ArrowRight } from '@phosphor-icons/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import ImagePanel from './ImagePanel';
