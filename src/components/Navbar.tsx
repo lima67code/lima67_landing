@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { List, X, ArrowRight } from '@phosphor-icons/react';
 import Logo from './Logo';
 
@@ -81,38 +82,42 @@ export default function Navbar() {
           {menuOpen ? <X size={24} weight="light" /> : <List size={24} weight="light" />}
         </button>
 
-        {/* Mobile menu */}
-        <div
-          id="mobile-menu"
-          className={`fixed inset-0 bg-cream z-40 flex flex-col items-center justify-center gap-8 transition-all duration-500 ${menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-            }`}
-          aria-hidden={!menuOpen}
-        >
-          <Logo variant="dark" size="lg" />
-
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              onClick={() => setMenuOpen(false)}
-              className="text-2xl font-light tracking-[0.1em] uppercase text-charcoal hover:text-gold transition-colors"
-            >
-              {link.label}
-            </a>
-          ))}
-          <a
-            href="#formulario"
-            onClick={() => setMenuOpen(false)}
-            className="group inline-flex items-center gap-3 bg-gold-dark text-cream text-base font-medium tracking-[0.05em] uppercase px-8 py-4 rounded-full mt-4 hover:bg-charcoal transition-colors duration-300"
+        {/* Mobile menu: portal a body para que el overlay cubra toda la pantalla con fondo opaco */}
+        {createPortal(
+          <div
+            id="mobile-menu"
+            className={`fixed inset-0 min-h-dvh bg-cream z-40 flex flex-col items-center justify-center gap-8 transition-all duration-500 ${menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+              }`}
+            aria-hidden={!menuOpen}
+            style={{ backgroundColor: 'var(--color-cream)' }}
           >
-            Solicitar Propuesta
-            <ArrowRight
-              size={16}
-              weight="bold"
-              className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"
-            />
-          </a>
-        </div>
+            <Logo variant="dark" size="lg" />
+
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={() => setMenuOpen(false)}
+                className="text-2xl font-light tracking-[0.1em] uppercase text-charcoal hover:text-gold transition-colors"
+              >
+                {link.label}
+              </a>
+            ))}
+            <a
+              href="#formulario"
+              onClick={() => setMenuOpen(false)}
+              className="group inline-flex items-center gap-3 bg-gold-dark text-cream text-base font-medium tracking-[0.05em] uppercase px-8 py-4 rounded-full mt-4 hover:bg-charcoal transition-colors duration-300"
+            >
+              Solicitar Propuesta
+              <ArrowRight
+                size={16}
+                weight="bold"
+                className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"
+              />
+            </a>
+          </div>,
+          document.body
+        )}
       </nav>
     </header>
   );

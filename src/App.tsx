@@ -15,6 +15,11 @@ function App() {
     sendPageView(location.pathname || '/', document.title);
   }, [location.pathname]);
 
+  // Ir al inicio de la página al cambiar de ruta (evita quedar a mitad de pantalla en legales)
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
   return (
     <Suspense fallback={
       <div className="min-h-screen bg-cream flex items-center justify-center" aria-live="polite">

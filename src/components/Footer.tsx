@@ -25,7 +25,9 @@ export default function Footer() {
           {/* Brand */}
           <div className="md:col-span-2">
             <div className="mb-6">
-              <Logo variant="light" size="lg" />
+              <Link to="/" className="inline-block" aria-label="Lima67 — Ir al inicio">
+                <Logo variant="light" size="lg" />
+              </Link>
             </div>
             <p className="text-sm font-light text-sand/70 leading-relaxed max-w-[340px]">
               La ejecución de un restaurante de lujo, en el escenario que tú elijas. Alta
