@@ -58,7 +58,7 @@ export default function Navbar() {
           <li>
             <a
               href="#formulario"
-              className="group inline-flex items-center gap-2 bg-gold text-cream text-[13px] font-medium tracking-[0.05em] uppercase px-6 py-3 rounded-full hover:bg-gold-dark transition-colors duration-300"
+              className="group inline-flex items-center gap-2 bg-gold-dark text-cream text-[13px] font-medium tracking-[0.05em] uppercase px-6 py-3 rounded-full hover:bg-charcoal transition-colors duration-300"
             >
               Solicitar Propuesta
               <ArrowRight
@@ -103,7 +103,7 @@ export default function Navbar() {
           <a
             href="#formulario"
             onClick={() => setMenuOpen(false)}
-            className="group inline-flex items-center gap-3 bg-gold text-cream text-base font-medium tracking-[0.05em] uppercase px-8 py-4 rounded-full mt-4"
+            className="group inline-flex items-center gap-3 bg-gold-dark text-cream text-base font-medium tracking-[0.05em] uppercase px-8 py-4 rounded-full mt-4 hover:bg-charcoal transition-colors duration-300"
           >
             Solicitar Propuesta
             <ArrowRight

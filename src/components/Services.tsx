@@ -186,7 +186,7 @@ export default function Services() {
                 key={service.id}
                 role="listitem"
                 onClick={() => handleSelect(i)}
-                aria-pressed={isActive}
+                aria-current={isActive ? 'true' : undefined}
                 className={`
                   group text-left w-full px-6 py-6 rounded-xl border transition-all duration-400
                   ${isActive

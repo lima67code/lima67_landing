@@ -253,7 +253,7 @@ export default function FormularioSection() {
                             {step > 1 && (
                                 <button
                                     onClick={() => setStep((s) => s - 1)}
-                                    className="flex items-center gap-1.5 text-[11px] font-medium tracking-[0.15em] uppercase text-stone hover:text-charcoal transition-colors duration-200"
+                                    className="flex items-center gap-1.5 text-[11px] font-medium tracking-[0.15em] uppercase text-graphite hover:text-charcoal transition-colors duration-200"
                                     aria-label="Volver al paso anterior"
                                 >
                                     <ArrowLeft size={13} weight="bold" />
@@ -288,7 +288,7 @@ export default function FormularioSection() {
                                                 }`}
                                         />
                                         <span
-                                            className={`hidden md:inline text-[9px] font-medium tracking-[0.15em] uppercase transition-colors duration-300 ${isActive ? 'text-charcoal' : isDone ? 'text-teal' : 'text-stone'
+                                            className={`hidden md:inline text-[9px] font-medium tracking-[0.15em] uppercase transition-colors duration-300 ${isActive ? 'text-charcoal' : isDone ? 'text-teal-dark' : 'text-graphite'
                                                 }`}
                                         >
                                             {label}
@@ -302,7 +302,7 @@ export default function FormularioSection() {
                             {/* Step 1 — Protocolo */}
                             {step === 1 && (
                                 <div className="animate-form-in">
-                                    <p className="text-[11px] font-semibold tracking-[0.3em] uppercase text-teal mb-5">
+                                    <p className="text-[11px] font-semibold tracking-[0.3em] uppercase text-teal-dark mb-5">
                                         Paso 1 de 5
                                     </p>
                                     <h3
@@ -330,7 +330,7 @@ export default function FormularioSection() {
                                                         <p className="text-sm font-semibold tracking-[-0.01em] text-charcoal mb-0.5">
                                                             {opt.label}
                                                         </p>
-                                                        <p className="text-xs font-light text-stone leading-relaxed">
+                                                        <p className="text-xs font-light text-graphite leading-relaxed">
                                                             {opt.sub}
                                                         </p>
                                                     </div>
@@ -344,10 +344,13 @@ export default function FormularioSection() {
                             {/* Step 2 — Formato de experiencia */}
                             {step === 2 && (
                                 <div className="animate-form-in">
-                                    <p className="text-[11px] font-semibold tracking-[0.3em] uppercase text-teal mb-5">
+                                    <p className="text-[11px] font-semibold tracking-[0.3em] uppercase text-teal-dark mb-5">
                                         Paso 2 de 5
                                     </p>
-                                    <h3 className="font-display text-[clamp(1.4rem,2.5vw,1.9rem)] font-bold leading-[1.15] tracking-[-0.02em] text-charcoal mb-3">
+                                    <h3
+                                        id="form-heading"
+                                        className="font-display text-[clamp(1.4rem,2.5vw,1.9rem)] font-bold leading-[1.15] tracking-[-0.02em] text-charcoal mb-3"
+                                    >
                                         ¿Qué formato de experiencia tiene en mente?
                                     </h3>
                                     <p className="text-sm font-light text-graphite mb-6">
@@ -381,10 +384,13 @@ export default function FormularioSection() {
                             {/* Step 3 — Dimensión */}
                             {step === 3 && (
                                 <div className="animate-form-in">
-                                    <p className="text-[11px] font-semibold tracking-[0.3em] uppercase text-teal mb-5">
+                                    <p className="text-[11px] font-semibold tracking-[0.3em] uppercase text-teal-dark mb-5">
                                         Paso 3 de 5
                                     </p>
-                                    <h3 className="font-display text-[clamp(1.4rem,2.5vw,1.9rem)] font-bold leading-[1.15] tracking-[-0.02em] text-charcoal mb-10">
+                                    <h3
+                                        id="form-heading"
+                                        className="font-display text-[clamp(1.4rem,2.5vw,1.9rem)] font-bold leading-[1.15] tracking-[-0.02em] text-charcoal mb-10"
+                                    >
                                         Entendido. ¿Cuál es la dimensión aproximada del evento?
                                     </h3>
                                     <div className="grid grid-cols-2 gap-3">
@@ -407,22 +413,25 @@ export default function FormularioSection() {
                             {/* Step 4 — Fecha y zona */}
                             {step === 4 && (
                                 <div className="animate-form-in">
-                                    <p className="text-[11px] font-semibold tracking-[0.3em] uppercase text-teal mb-5">
+                                    <p className="text-[11px] font-semibold tracking-[0.3em] uppercase text-teal-dark mb-5">
                                         Paso 4 de 5
                                     </p>
-                                    <h3 className="font-display text-[clamp(1.4rem,2.5vw,1.9rem)] font-bold leading-[1.15] tracking-[-0.02em] text-charcoal mb-10">
+                                    <h3
+                                        id="form-heading"
+                                        className="font-display text-[clamp(1.4rem,2.5vw,1.9rem)] font-bold leading-[1.15] tracking-[-0.02em] text-charcoal mb-10"
+                                    >
                                         Perfecto. Para comprobar la disponibilidad de nuestra agenda y logística:
                                     </h3>
                                     <div className="flex flex-col gap-4 mb-8">
                                         <label className="flex flex-col gap-2 min-w-0">
-                                            <span className="text-[11px] font-semibold tracking-[0.1em] uppercase text-stone truncate">
+                                            <span className="text-[11px] font-semibold tracking-[0.1em] uppercase text-graphite truncate">
                                                 Fecha del evento
                                             </span>
                                             <div className="relative overflow-hidden">
                                                 <CalendarBlank
                                                     size={16}
                                                     weight="light"
-                                                    className="absolute left-4 top-1/2 -translate-y-1/2 text-stone cursor-pointer z-10"
+                                                    className="absolute left-4 top-1/2 -translate-y-1/2 text-graphite cursor-pointer z-10"
                                                     onClick={() => dateInputRef.current?.showPicker()}
                                                 />
                                                 <input
@@ -436,14 +445,14 @@ export default function FormularioSection() {
                                             </div>
                                         </label>
                                         <label className="flex flex-col gap-2 min-w-0">
-                                            <span className="text-[11px] font-semibold tracking-[0.1em] uppercase text-stone truncate">
+                                            <span className="text-[11px] font-semibold tracking-[0.1em] uppercase text-graphite truncate">
                                                 Zona o Ciudad
                                             </span>
                                             <div className="relative">
                                                 <MapPin
                                                     size={16}
                                                     weight="light"
-                                                    className="absolute left-4 top-1/2 -translate-y-1/2 text-stone pointer-events-none"
+                                                    className="absolute left-4 top-1/2 -translate-y-1/2 text-graphite pointer-events-none"
                                                 />
                                                 <input
                                                     type="text"
@@ -468,15 +477,18 @@ export default function FormularioSection() {
                             {/* Step 5 — Contacto */}
                             {step === 5 && (
                                 <div className="animate-form-in">
-                                    <p className="text-[11px] font-semibold tracking-[0.3em] uppercase text-teal mb-5">
+                                    <p className="text-[11px] font-semibold tracking-[0.3em] uppercase text-teal-dark mb-5">
                                         Paso 5 de 5
                                     </p>
-                                    <h3 className="font-display text-[clamp(1.4rem,2.5vw,1.9rem)] font-bold leading-[1.15] tracking-[-0.02em] text-charcoal mb-3">
+                                    <h3
+                                        id="form-heading"
+                                        className="font-display text-[clamp(1.4rem,2.5vw,1.9rem)] font-bold leading-[1.15] tracking-[-0.02em] text-charcoal mb-3"
+                                    >
                                         Gracias. ¿A quién debemos dirigir la propuesta inicial?
                                     </h3>
                                     <div className="flex flex-col gap-4 mb-8">
                                         <label className="flex flex-col gap-2">
-                                            <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-stone">
+                                            <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-graphite">
                                                 Nombre & Apellidos
                                             </span>
                                             <input
@@ -488,7 +500,7 @@ export default function FormularioSection() {
                                             />
                                         </label>
                                         <label className="flex flex-col gap-2">
-                                            <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-stone">
+                                            <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-graphite">
                                                 Celular (WhatsApp)
                                             </span>
                                             <div className="flex rounded-xl border border-bone bg-white overflow-hidden focus-within:border-teal focus-within:ring-1 focus-within:ring-teal transition-colors">
@@ -522,7 +534,7 @@ export default function FormularioSection() {
                                             )}
                                         </label>
                                         <label className="flex flex-col gap-2">
-                                            <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-stone">
+                                            <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-graphite">
                                                 Email
                                             </span>
                                             <input
@@ -574,7 +586,6 @@ export default function FormularioSection() {
                                                 onClick={handleSubmit}
                                                 disabled={!form.nombre || !phoneValid || !emailValid || sending}
                                                 className="w-full flex items-center justify-center gap-3 py-5 rounded-xl bg-teal text-cream text-[13px] font-medium tracking-[0.08em] uppercase transition-all duration-500 hover:bg-teal-dark hover:shadow-[0_8px_40px_rgba(182,141,60,0.35)] disabled:pointer-events-none disabled:opacity-30"
-                                                aria-disabled={!form.nombre || !phoneValid || !emailValid || sending}
                                             >
                                                 {sending ? 'Enviando…' : 'Enviar solicitud'}
                                             </button>
@@ -583,7 +594,7 @@ export default function FormularioSection() {
                                                     {webhookError}
                                                 </p>
                                             )}
-                                            <p className="text-[11px] font-light text-stone/60 text-center mt-4">
+                                            <p className="text-[11px] font-light text-graphite text-center mt-4">
                                                 Al hacer clic en enviar, está de acuerdo con nuestra{' '}
                                                 <a href="/politica-privacidad" className="text-teal underline hover:text-teal-dark transition-colors" target="_blank" rel="noopener noreferrer">
                                                     política de privacidad

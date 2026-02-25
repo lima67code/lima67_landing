@@ -35,7 +35,7 @@ export default function Footer() {
 
           {/* Navigation */}
           <nav aria-label="Navegación del footer">
-            <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-sand/50 mb-5">
+            <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-sand/80 mb-5">
               Empresa
             </p>
             <ul className="space-y-3" role="list">
@@ -47,7 +47,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    className="text-sm font-light text-sand/60 hover:text-cream transition-colors duration-300"
+                    className="text-sm font-light text-sand/80 hover:text-cream transition-colors duration-300"
                   >
                     {link.label}
                   </a>
@@ -58,14 +58,14 @@ export default function Footer() {
 
           {/* Legal */}
           <nav aria-label="Enlaces legales">
-            <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-sand/50 mb-5">
+            <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-sand/80 mb-5">
               Legal
             </p>
             <ul className="space-y-3" role="list">
               <li>
                 <Link
                   to="/aviso-legal"
-                  className="text-sm font-light text-sand/60 hover:text-cream transition-colors duration-300"
+                  className="text-sm font-light text-sand/80 hover:text-cream transition-colors duration-300"
                 >
                   Aviso Legal
                 </Link>
@@ -73,7 +73,7 @@ export default function Footer() {
               <li>
                 <Link
                   to="/politica-privacidad"
-                  className="text-sm font-light text-sand/60 hover:text-cream transition-colors duration-300"
+                  className="text-sm font-light text-sand/80 hover:text-cream transition-colors duration-300"
                 >
                   Política de Privacidad
                 </Link>
@@ -81,7 +81,7 @@ export default function Footer() {
               <li>
                 <Link
                   to="/politica-cookies"
-                  className="text-sm font-light text-sand/60 hover:text-cream transition-colors duration-300"
+                  className="text-sm font-light text-sand/80 hover:text-cream transition-colors duration-300"
                 >
                   Política de Cookies
                 </Link>
@@ -91,7 +91,7 @@ export default function Footer() {
 
           {/* Social */}
           <div>
-            <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-sand/50 mb-5">
+            <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-sand/80 mb-5">
               Redes
             </p>
             <div className="flex items-center gap-4">
@@ -99,10 +99,21 @@ export default function Footer() {
                 href="https://www.instagram.com/lima67.madrid/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sand/40 hover:text-cream transition-colors duration-300"
+                className="text-sand/70 hover:text-cream transition-colors duration-300"
                 aria-label="Síguenos en Instagram"
               >
                 <InstagramLogo size={20} weight="light" />
+              </a>
+              <a
+                href="https://www.tiktok.com/@lima67.madrid"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sand/70 hover:text-cream transition-colors duration-300 [&_svg]:w-5 [&_svg]:h-5"
+                aria-label="Síguenos en TikTok"
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                  <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
+                </svg>
               </a>
             </div>
           </div>
@@ -110,10 +121,10 @@ export default function Footer() {
 
         {/* Bottom */}
         <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-[11px] font-light text-sand/50 tracking-[0.05em]">
+          <p className="text-[11px] font-light text-sand/70 tracking-[0.05em]">
             &copy; {new Date().getFullYear()} Lima67 Catering & Eventos. Todos los derechos reservados.
           </p>
-          <p className="text-[12px] font-light text-sand/50 tracking-[0.05em]">
+          <p className="text-[12px] font-light text-sand/70 tracking-[0.05em]">
             Diseñado por{' '}
             <a
               href="https://www.vradis.es/"

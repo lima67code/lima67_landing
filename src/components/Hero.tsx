@@ -103,7 +103,7 @@ export default function Hero() {
         <div ref={ctaRef}>
           <a
             href="#formulario"
-            className="group inline-flex items-center gap-3 bg-gold text-cream text-[13px] font-medium tracking-[0.08em] uppercase px-10 py-4 rounded-full hover:bg-gold-dark transition-all duration-500 hover:shadow-[0_8px_40px_rgba(182,141,60,0.4)]"
+            className="group inline-flex items-center gap-3 bg-gold-dark text-cream text-[13px] font-medium tracking-[0.08em] uppercase px-10 py-4 rounded-full hover:bg-charcoal transition-all duration-500 hover:shadow-[0_8px_40px_rgba(182,141,60,0.4)]"
           >
             Solicitar Presupuesto
             <ArrowRight
