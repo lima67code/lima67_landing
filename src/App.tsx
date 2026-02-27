@@ -7,6 +7,7 @@ import HomePage from './pages/HomePage';
 const AvisoLegal = lazy(() => import('./pages/AvisoLegal'));
 const PoliticaPrivacidad = lazy(() => import('./pages/PoliticaPrivacidad'));
 const PoliticaCookies = lazy(() => import('./pages/PoliticaCookies'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 function App() {
   const location = useLocation();
@@ -31,6 +32,7 @@ function App() {
         <Route path="/aviso-legal" element={<AvisoLegal />} />
         <Route path="/politica-privacidad" element={<PoliticaPrivacidad />} />
         <Route path="/politica-cookies" element={<PoliticaCookies />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Suspense>
   );

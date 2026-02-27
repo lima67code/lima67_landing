@@ -6,6 +6,7 @@
   <link rel="icon" type="image/x-icon" href="/images/isotipo.ico" />
   <link rel="icon" type="image/svg+xml" href="/images/isotipo.svg" />
   <link rel="apple-touch-icon" href="/images/isotipo.png" />
+  <link rel="manifest" href="/manifest.json" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="index, follow" />
   <meta name="theme-color" content="#FAF8F5" />
@@ -36,25 +37,37 @@
     content="Alta cocina peruana de autor para eventos corporativos, diplomáticos y privados en Madrid." />
   <meta name="twitter:image" content="https://lima67.com/images/corporativo.webp" />
 
-  <!-- JSON-LD — LocalBusiness para SEO local Madrid -->
+  <!-- JSON-LD — FoodEstablishment + catering peruano para SEO local Madrid -->
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Restaurant",
+      "@type": "FoodEstablishment",
       "name": "Lima67 Catering & Eventos",
-      "description": "Catering peruano en Madrid. Alta cocina peruana de autor para eventos corporativos, diplomáticos y privados.",
-      "servesCuisine": "Peruvian",
+      "description": "Servicio de catering peruano en Madrid. Alta cocina peruana de autor para eventos corporativos, diplomáticos y privados.",
+      "servesCuisine": ["Peruana", "Peruvian"],
+      "knowsAbout": ["Catering peruano", "Cocina peruana", "Eventos corporativos", "Catering Madrid"],
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Madrid",
-        "addressRegion": "Madrid",
+        "addressRegion": "Comunidad de Madrid",
+        "postalCode": "28001",
         "addressCountry": "ES"
       },
-      "areaServed": "Madrid",
+      "areaServed": {
+        "@type": "City",
+        "name": "Madrid",
+        "sameAs": "https://es.wikipedia.org/wiki/Madrid"
+      },
       "url": "https://lima67.com",
       "image": "https://lima67.com/images/corporativo.webp",
       "telephone": "+34613510777",
-      "priceRange": "$$$"
+      "priceRange": "$$$",
+      "currenciesAccepted": "EUR",
+      "paymentAccepted": "Transferencia bancaria, Tarjeta de crédito",
+      "hasMenu": {
+        "@type": "Menu",
+        "description": "Menús de catering peruano de autor: ceviche, causa limeña, tiradito y platos de firma"
+      }
     }
     </script>
 
