@@ -95,6 +95,8 @@ export default function WhyUs() {
         <img
           src="/logo/LIMA67-solo.svg"
           alt=""
+          width={400}
+          height={100}
           className="w-full h-auto"
           draggable={false}
           style={{

@@ -13,6 +13,8 @@ export default function Footer() {
         <img
           src="/logo/LIMA67-solo.svg"
           alt=""
+          width={400}
+          height={100}
           className="w-full h-auto"
           draggable={false}
           style={{
@@ -126,17 +128,7 @@ export default function Footer() {
           <p className="text-[11px] font-light text-sand/70 tracking-[0.05em]">
             &copy; {new Date().getFullYear()} Lima67 Catering & Eventos. Todos los derechos reservados.
           </p>
-          <p className="text-[12px] font-light text-sand/70 tracking-[0.05em]">
-            Diseñado por{' '}
-            <a
-              href="https://www.vradis.es/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sand/70 hover:text-cream transition-colors duration-300"
-            >
-              Vrads
-            </a>
-          </p>
+        
         </div>
       </div>
     </footer>

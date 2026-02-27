@@ -45,7 +45,6 @@ export default function Services() {
   const imgBRef = useRef<HTMLImageElement>(null);
   const activeBufRef = useRef<'A' | 'B'>('A');
   const tagLineRef = useRef<HTMLSpanElement>(null);
-  const descRef = useRef<HTMLParagraphElement>(null);
   const isAnimatingRef = useRef(false);
 
   // On mount: entrance animation
@@ -77,6 +76,8 @@ export default function Services() {
     if (index === active || isAnimatingRef.current) return;
     isAnimatingRef.current = true;
 
+    setActive(index);
+
     const fromBuf = activeBufRef.current;
     const toBuf = fromBuf === 'A' ? 'B' : 'A';
     const fromImg = fromBuf === 'A' ? imgARef.current : imgBRef.current;
@@ -93,24 +94,12 @@ export default function Services() {
       onComplete: () => {
         activeBufRef.current = toBuf;
         isAnimatingRef.current = false;
-        setActive(index);
       },
     });
 
-    // Crossfade + subtle scale
+    // Crossfade + subtle scale (solo imagen; título y descripción cambian sin animación)
     tl.to(fromImg, { opacity: 0, scale: 0.97, duration: 0.55, ease: 'power2.inOut' })
       .to(toImg, { opacity: 1, scale: 1, duration: 0.65, ease: 'power2.out' }, '-=0.35');
-
-    // Text reveal
-    if (descRef.current) {
-      tl.fromTo(descRef.current,
-        { opacity: 0, y: 12 },
-        { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out' },
-        '-=0.4'
-      );
-    }
-
-    setActive(index);
   };
 
   return (
@@ -220,7 +209,6 @@ export default function Services() {
                       </h3>
                     </div>
                     <p
-                      ref={isActive ? descRef : undefined}
                       className={`text-sm font-light leading-relaxed ${isActive ? 'text-cream/75' : 'text-graphite'
                         }`}
                     >

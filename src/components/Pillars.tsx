@@ -8,19 +8,19 @@ const pillars = [
   {
     title: 'Staff de Élite',
     subtitle: 'Equipo formado en alta hostelería y protocolo internacional para un servicio sin fricciones.',
-    image: '/images_marquee/personal.webp',
+    image: '/images/personal.webp',
     alt: 'Personal profesional de catering en uniforme',
   },
   {
     title: 'Sitios Exclusivos',
     subtitle: 'Acceso a entornos singulares que refuerzan el prestigio de su convocatoria.',
-    image: '/images_marquee/ceviche.webp',
+    image: '/images_marquee/pulpodish.webp',
     alt: 'Lugar exclusivo decorado para evento premium',
   },
   {
     title: 'Cocina Peruana In-Situ',
     subtitle: 'Elaboración íntegra en el lugar del evento para garantizar la frescura y la complejidad de los sabores que definen nuestra gastronomía.',
-    image: '/images_marquee/cocina_aire_libre.webp',
+    image: '/images/cocina_aire_libre.webp',
     alt: 'Chef preparando gastronomía de autor en el lugar del evento',
   },
 ];
@@ -66,11 +66,11 @@ export default function Pillars() {
         }
       );
 
-      // Parallax on internal image
+      // Parallax suave (imagen ya no sobresale, así no se recorta el borde superior)
       const img = card.querySelector('img');
       if (img) {
         gsap.to(img, {
-          yPercent: 15,
+          yPercent: 4,
           ease: 'none',
           scrollTrigger: {
             trigger: card,
@@ -160,16 +160,21 @@ export default function Pillars() {
               className="group relative aspect-[3/4] rounded-xl overflow-hidden cursor-default transform-gpu"
               role="listitem"
             >
-              {/* Image */}
+              {/* Wrapper con scale en hover; el img solo lleva parallax (GSAP) para no pisar transform */}
               <div className="absolute inset-0 overflow-hidden">
-                <img
-                  src={pillar.image}
-                  alt={pillar.alt}
-                  width={400}
-                  height={533}
-                  className="absolute inset-0 w-full h-[120%] object-cover transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy"
-                />
+                <div
+                  className="absolute inset-0 transition-transform duration-700 group-hover:scale-105"
+                  aria-hidden
+                >
+                  <img
+                    src={pillar.image}
+                    alt={pillar.alt}
+                    width={400}
+                    height={533}
+                    className="absolute inset-0 block w-full h-full object-cover object-top"
+                    loading="lazy"
+                  />
+                </div>
               </div>
 
               {/* Overlay */}
@@ -182,10 +187,10 @@ export default function Pillars() {
                 <h3 className="font-display text-xl md:text-2xl font-bold tracking-[0.03em] uppercase text-cream mb-2 leading-tight">
                   {pillar.title}
                 </h3>
-                {/* Subtitle: always visible on mobile, GSAP-animated on desktop */}
+                {/* Subtitle: siempre visible en móvil; en desktop se muestra al hover (GSAP) */}
                 <p
                   data-subtitle
-                  className="text-sm font-light text-cream/70 leading-relaxed"
+                  className="text-sm font-light text-cream/70 leading-relaxed max-md:!h-auto max-md:!opacity-100 max-md:!overflow-visible"
                 >
                   {pillar.subtitle}
                 </p>

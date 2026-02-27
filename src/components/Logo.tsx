@@ -25,6 +25,8 @@ export default function Logo({
       <img
         src="/logo/logo-lima67.svg"
         alt="Lima67 logo"
+        width={1395}
+        height={609}
         className={`${sizeClasses[size]} w-auto`}
         style={filterStyle}
         role="img"

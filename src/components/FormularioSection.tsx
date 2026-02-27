@@ -222,7 +222,7 @@ export default function FormularioSection() {
                         loading="lazy"
                         className="absolute inset-0 w-full h-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-charcoal/55" />
+                    <div className="absolute inset-0 bg-charcoal/70" />
                     {/* Overlay content */}
                     <div className="absolute inset-0 flex flex-col justify-end p-14">
                         <h2 className="font-display text-[clamp(1.6rem,2.8vw,2.4rem)] font-bold leading-[1.1] tracking-[-0.02em] text-cream max-w-[420px] mb-8">
@@ -235,7 +235,7 @@ export default function FormularioSection() {
                                 'Propuesta 100% personalizada',
                                 'Sin compromiso, sin letra pequeña',
                             ].map((item) => (
-                                <li key={item} className="flex items-center gap-3 text-sm font-regular text-cream/80">
+                                <li key={item} className="flex items-center gap-3 text-md font-medium text-cream/80">
                                     <span className="w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0" />
                                     {item}
                                 </li>

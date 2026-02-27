@@ -1,20 +1,15 @@
 import { useEffect, useRef } from 'react';
 
 const images = [
-  { src: '/images_marquee/catering.webp', alt: 'Servicio de catering Lima67' },
-  { src: '/images_marquee/causa.webp', alt: 'Causa limeña' },
-  { src: '/images_marquee/fernando_banderas.webp', alt: 'Fernando Banderas' },
-  { src: '/images_marquee/ceviche.webp', alt: 'Ceviche peruano' },
-  { src: '/images_marquee/pisco-foto.webp', alt: 'Pisco peruano' },
-  { src: '/images_marquee/cocina_aire_libre.webp', alt: 'Cocina al aire libre Lima67' },
-  { src: '/images_marquee/fernando_valderrama.webp', alt: 'Fernando Valderrama' },
-  { src: '/images_marquee/empanadas.webp', alt: 'Empanadas' },
-  { src: '/images_marquee/personal.webp', alt: 'Equipo Lima67' },
-  { src: '/images_marquee/pisco_botella.webp', alt: 'Botella de pisco' },
-  { src: '/images_marquee/trabajadora.webp', alt: 'Trabajadora Lima67' },
-  // Pulpo: juntos en el marquee; pulpoman muestra la parte inferior
-  { src: '/images_marquee/pulpodish.webp', alt: 'Plato de pulpo Lima67' },
+  { src: '/images_marquee/decoracion.webp', alt: 'Decoración Lima67' },
+  { src: '/images_marquee/fernando_partner.webp', alt: 'Fernando partner Lima67' },
   { src: '/images_marquee/pulpoman.webp', alt: 'Pulpo al estilo Lima67', objectPosition: 'bottom' as const },
+  { src: '/images_marquee/decoracion_2.webp', alt: 'Decoración eventos' },
+  { src: '/images_marquee/mesa_fiesta.webp', alt: 'Mesa de fiesta' },
+  { src: '/images_marquee/personal_lima67.webp', alt: 'Personal Lima67' },
+  { src: '/images_marquee/decoracion_3.webp', alt: 'Ambiente Lima67' },
+  { src: '/images_marquee/pisco.webp', alt: 'Pisco peruano' },
+  { src: '/images_marquee/pulpodish.webp', alt: 'Plato de pulpo Lima67' },
 ];
 
 // Duplicate the array to create seamless infinite loop
