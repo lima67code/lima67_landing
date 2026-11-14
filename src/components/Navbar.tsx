@@ -24,7 +24,7 @@ export default function Navbar() {
   const navLinks = [
     { label: 'Servicios', href: '#servicios' },
     { label: 'Proceso', href: '#pilares' },
-    { label: 'Por qué Lima67', href: '#por-que' },
+    { label: 'Por qué Lima 67', href: '#por-que' },
   ];
 
   return (
@@ -40,7 +40,7 @@ export default function Navbar() {
         className="max-w-[1400px] mx-auto flex items-center justify-between px-6 md:px-12 h-20"
       >
         {/* Logo */}
-        <a href="#" className="relative z-50" aria-label="Lima67 — Inicio">
+        <a href="#" className="relative z-50" aria-label="Lima 67 — Inicio">
           <Logo variant="dark" size="md" />
         </a>
 

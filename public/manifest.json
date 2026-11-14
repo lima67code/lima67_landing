@@ -1,7 +1,7 @@
 {
-  "name": "Lima67 Catering & Eventos",
-  "short_name": "Lima67",
-  "description": "Servicio de catering peruano en Madrid. Alta cocina peruana de autor para eventos corporativos, diplomáticos y privados.",
+  "name": "Lima 67 Catering Peruano Madrid",
+  "short_name": "Lima 67",
+  "description": "Catering de alta gastronomía peruana para bodas en fincas, eventos corporativos y celebraciones privadas en Madrid y toda España.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#FAF8F5",

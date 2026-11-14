@@ -24,13 +24,13 @@ export default function Logo({
     <div className={`inline-flex flex-col items-center ${className}`}>
       <img
         src="/logo/logo-lima67.svg"
-        alt="Lima67 logo"
+        alt="Lima 67 logo"
         width={1395}
         height={609}
         className={`${sizeClasses[size]} w-auto`}
         style={filterStyle}
         role="img"
-        aria-label="Lima67 logo"
+        aria-label="Lima 67 logo"
       />
     </div>
   );

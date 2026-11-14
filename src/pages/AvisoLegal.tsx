@@ -23,20 +23,20 @@ export default function AvisoLegal() {
       <h2>2. Objeto</h2>
       <p>
         El presente aviso legal regula el uso y utilización del sitio web <strong>lima67.com</strong> (en adelante, la web),
-        del que es titular Whitney Solanyee Arquiñigo Pozo (Lima67 Catering & Eventos). La navegación por la web atribuye la condición de usuario e
+        del que es titular Whitney Solanyee Arquiñigo Pozo (Lima 67 Catering & Eventos). La navegación por la web atribuye la condición de usuario e
         implica la aceptación plena y sin reservas de todas y cada una de las disposiciones incluidas en este Aviso Legal.
       </p>
 
       <h2>3. Condiciones de uso</h2>
       <p>
         La web tiene por objeto facilitar al usuario la información sobre los servicios de catering y eventos
-        ofrecidos por Lima67. El usuario se compromete a hacer un uso adecuado de los contenidos y servicios que
+        ofrecidos por Lima 67. El usuario se compromete a hacer un uso adecuado de los contenidos y servicios que
         se ofrecen a través de esta web y a no emplearlos para realizar actividades ilícitas o contrarias a la buena fe.
       </p>
 
       <h2>4. Propiedad intelectual e industrial</h2>
       <p>
-        Whitney Solanyee Arquiñigo Pozo (Lima67 Catering & Eventos), por sí o como cesionaria, es titular de todos los derechos de propiedad intelectual
+        Whitney Solanyee Arquiñigo Pozo (Lima 67 Catering & Eventos), por sí o como cesionaria, es titular de todos los derechos de propiedad intelectual
         e industrial de su página web, así como de los elementos contenidos en la misma (textos, imágenes, diseño gráfico,
         código fuente, logotipos, marcas, etc.). Todos los derechos reservados. Queda prohibida la reproducción,
         distribución y comunicación pública de los contenidos sin autorización expresa del titular.

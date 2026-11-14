@@ -34,7 +34,7 @@ export default function PoliticaPrivacidad() {
 
       <h2>4. Conservación de los datos</h2>
       <p>
-        Los datos se conservarán mientras mantenga una relación comercial con Lima67 o durante el tiempo
+        Los datos se conservarán mientras mantenga una relación comercial con Lima 67 o durante el tiempo
         necesario para cumplir con las obligaciones legales. Una vez finalizado el servicio y transcurridos
         los plazos legales aplicables, los datos serán suprimidos de forma segura.
       </p>

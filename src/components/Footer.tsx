@@ -27,7 +27,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="md:col-span-2">
             <div className="mb-6">
-              <Link to="/" className="inline-block" aria-label="Lima67 — Ir al inicio">
+              <Link to="/" className="inline-block" aria-label="Lima 67 — Ir al inicio">
                 <Logo variant="light" size="lg" />
               </Link>
             </div>
@@ -46,7 +46,7 @@ export default function Footer() {
               {[
                 { label: 'Servicios', href: '#servicios' },
                 { label: 'Nuestro proceso', href: '#pilares' },
-                { label: 'Por qué Lima67', href: '#por-que' },
+                { label: 'Por qué Lima 67', href: '#por-que' },
               ].map((link) => (
                 <li key={link.href}>
                   <a
@@ -126,7 +126,7 @@ export default function Footer() {
         {/* Bottom */}
         <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-[11px] font-light text-sand/70 tracking-[0.05em]">
-            &copy; {new Date().getFullYear()} Lima67 Catering & Eventos. Todos los derechos reservados.
+            &copy; {new Date().getFullYear()} Lima 67 Catering & Eventos. Todos los derechos reservados.
           </p>
         
         </div>

@@ -216,7 +216,7 @@ export default function FormularioSection() {
                 <div className="hidden md:block md:w-[45%] relative overflow-hidden">
                     <img
                         src="/images/privado.webp"
-                        alt="Evento Lima67"
+                        alt="Evento Lima 67"
                         width={800}
                         height={600}
                         loading="lazy"
