@@ -77,30 +77,30 @@
     }
   </script>
 
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-D0JF08MCB6"></script>
+  <!-- Google tag (gtag.js) — Consent Mode v2.
+       Todo denegado por defecto. La librería gtag.js NO se descarga hasta que
+       el usuario acepta las cookies analíticas (ver src/cookieconsent.ts). -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied',
+      functionality_storage: 'denied',
+      personalization_storage: 'denied',
+      security_storage: 'granted'
+    });
     gtag('js', new Date());
-
-    gtag('config', 'G-D0JF08MCB6');
+    gtag('config', 'G-D0JF08MCB6', { send_page_view: false });
   </script>
 
   <!-- Preload LCP image -->
   <link rel="preload" href="/images/corporativo.webp" as="image" />
 
-  <!-- Fonts — precarga y carga no bloqueante -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&display=swap"
-    rel="stylesheet" media="print" onload="this.media='all'" />
-  <noscript>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&display=swap"
-      rel="stylesheet" />
-  </noscript>
+  <!-- Fonts — autoalojadas (sin transferir la IP del visitante a Google) -->
+  <link rel="preload" href="/fonts/Montserrat-latin.woff2" as="font" type="font/woff2" crossorigin />
 </head>
 
 <body>

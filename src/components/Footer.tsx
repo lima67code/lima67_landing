@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { InstagramLogo } from '@phosphor-icons/react';
 import Logo from './Logo';
+import { openCookiePreferences } from '../cookieconsent';
 
 export default function Footer() {
   return (
@@ -89,6 +90,15 @@ export default function Footer() {
                 >
                   Política de Cookies
                 </Link>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={openCookiePreferences}
+                  className="text-sm font-light text-sand/80 hover:text-cream transition-colors duration-300 cursor-pointer"
+                >
+                  Configurar cookies
+                </button>
               </li>
             </ul>
           </nav>
