@@ -1,5 +1,5 @@
 import { useRef, useEffect } from 'react';
-import { ShieldCheck, Lightning, Briefcase } from '@phosphor-icons/react';
+import { CallBell, ChatsCircle, ForkKnife } from '@phosphor-icons/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -7,22 +7,22 @@ gsap.registerPlugin(ScrollTrigger);
 
 const benefits = [
   {
-    icon: ShieldCheck,
-    title: 'Cero fallos de comunicación',
+    icon: CallBell,
+    title: 'Coordinación entre cocina y sala',
     description:
-      'Coordinación militétrica entre cocina y sala bajo un estándar de restaurante de lujo.',
+      'Tiempos de servicio planificados y un responsable de Lima 67 presente durante todo el evento.',
   },
   {
-    icon: Lightning,
-    title: 'Respuesta inmediata',
+    icon: ChatsCircle,
+    title: 'Respuesta rápida',
     description:
-      'Gestión ágil de cambios de última hora en menú o logística con una sola llamada.',
+      'Propuesta en 24 horas y atención directa por teléfono o WhatsApp ante cualquier cambio de menú o logística.',
   },
   {
-    icon: Briefcase,
-    title: 'Un solo responsable',
+    icon: ForkKnife,
+    title: 'Menús a medida',
     description:
-      'Evite la gestión de múltiples proveedores; somos su único interlocutor de principio a fin.',
+      'Propuestas adaptadas al formato, al número de invitados y a alergias o dietas especiales.',
   },
 ];
 
@@ -118,10 +118,10 @@ export default function WhyUs() {
             className="font-display text-[clamp(1.8rem,4vw,3rem)] font-bold leading-[1.1] tracking-[-0.02em] text-white mb-6"
           >
             Un solo equipo.<br />
-            <span className="font-light italic text-gold-light">Cero fricciones.</span>
+            <span className="font-normal italic text-gold-light">Un solo interlocutor.</span>
           </h2>
-          <p className="text-base font-light text-cream/75 leading-relaxed">
-            Mientras otros ensamblan proveedores, nosotros controlamos toda la cadena. El resultado: eventos impecables que se ejecutan solos.
+          <p className="text-base font-normal text-cream/75 leading-relaxed">
+            Coordinamos la gastronomía, el servicio y los tiempos de su evento con una sola persona de contacto. Usted atiende a sus invitados; nosotros nos ocupamos de todo lo demás.
           </p>
         </div>
 
@@ -155,7 +155,7 @@ export default function WhyUs() {
                   {benefit.title}
                 </h3>
                 {/* Description */}
-                <p className="text-base font-light text-cream/75 leading-relaxed">
+                <p className="text-base font-normal text-cream/75 leading-relaxed">
                   {benefit.description}
                 </p>
               </article>

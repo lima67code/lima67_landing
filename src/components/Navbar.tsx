@@ -98,7 +98,7 @@ export default function Navbar() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setMenuOpen(false)}
-                className="text-2xl font-light tracking-[0.1em] uppercase text-charcoal hover:text-gold transition-colors"
+                className="text-2xl font-normal tracking-[0.1em] uppercase text-charcoal hover:text-gold transition-colors"
               >
                 {link.label}
               </a>

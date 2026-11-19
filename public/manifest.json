@@ -8,15 +8,8 @@
   "theme_color": "#FAF8F5",
   "lang": "es",
   "icons": [
-    {
-      "src": "/images/isotipo.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "/images/isotipo.svg",
-      "sizes": "any",
-      "type": "image/svg+xml"
-    }
+    { "src": "/logo/isotipo-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/logo/isotipo-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/logo/isotipo-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ]
 }

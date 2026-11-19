@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { Buildings, Briefcase, Champagne, CalendarBlank, MapPin, ArrowLeft, CookingPot, Wine, Package, ForkKnife, Users } from '@phosphor-icons/react';
+import { Heart, Briefcase, Champagne, CalendarBlank, MapPin, ArrowLeft, CookingPot, Wine, Package, ForkKnife, Users } from '@phosphor-icons/react';
 
 // En desarrollo usamos proxy (mismo origen) para evitar CORS con n8n
 const N8N_WEBHOOK_URL = import.meta.env.DEV
@@ -52,22 +52,22 @@ const formatPhoneDisplay = (digits: string) => {
 
 const protocoloOptions = [
     {
-        id: 'institucional',
-        icon: Buildings,
-        label: 'Institucional / Diplomático',
-        sub: 'Recepciones diplomáticas donde la imagen de su institución es la prioridad',
-    },
-    {
-        id: 'corporativo',
-        icon: Briefcase,
-        label: 'Corporativo / Empresa',
-        sub: 'Juntas de alta dirección que exigen discreción y tiempos exactos',
+        id: 'bodas',
+        icon: Heart,
+        label: 'Bodas',
+        sub: 'Banquete, cóctel o show cooking, con prueba de degustación previa y coordinación con la finca',
     },
     {
         id: 'privado',
         icon: Champagne,
-        label: 'Evento Privado',
-        sub: 'Residencias y galas con servicio exclusivo y platos de firma con herencia peruana',
+        label: 'Eventos privados',
+        sub: 'Cumpleaños, aniversarios y celebraciones en casa o en el espacio que elijan',
+    },
+    {
+        id: 'corporativo',
+        icon: Briefcase,
+        label: 'Empresas B2B',
+        sub: 'Coffee breaks, almuerzos de trabajo, cócteles corporativos y eventos de marca',
     },
 ];
 
@@ -215,7 +215,7 @@ export default function FormularioSection() {
                 {/* Left — photo panel */}
                 <div className="hidden md:block md:w-[45%] relative overflow-hidden">
                     <img
-                        src="/images/privado.webp"
+                        src="/images_marquee/mesas_lima67.webp"
                         alt="Evento Lima 67"
                         width={800}
                         height={600}
@@ -253,7 +253,7 @@ export default function FormularioSection() {
                             {step > 1 && (
                                 <button
                                     onClick={() => setStep((s) => s - 1)}
-                                    className="flex items-center gap-1.5 text-[11px] font-medium tracking-[0.15em] uppercase text-graphite hover:text-charcoal transition-colors duration-200"
+                                    className="cursor-pointer flex items-center gap-1.5 text-[11px] font-medium tracking-[0.15em] uppercase text-graphite hover:text-charcoal transition-colors duration-200"
                                     aria-label="Volver al paso anterior"
                                 >
                                     <ArrowLeft size={13} weight="bold" />
@@ -318,7 +318,7 @@ export default function FormularioSection() {
                                                 <button
                                                     key={opt.id}
                                                     onClick={() => handleProtocolo(opt.id)}
-                                                    className={`group text-left flex items-center gap-5 px-6 py-5 rounded-xl border transition-all duration-300 ${form.protocolo === opt.id
+                                                    className={`cursor-pointer group text-left flex items-center gap-5 px-6 py-5 rounded-xl border transition-all duration-300 ${form.protocolo === opt.id
                                                         ? 'border-teal bg-teal/5'
                                                         : 'border-bone hover:border-teal/40 hover:bg-teal/3'
                                                         }`}
@@ -330,7 +330,7 @@ export default function FormularioSection() {
                                                         <p className="text-sm font-semibold tracking-[-0.01em] text-charcoal mb-0.5">
                                                             {opt.label}
                                                         </p>
-                                                        <p className="text-xs font-light text-graphite leading-relaxed">
+                                                        <p className="text-xs font-normal text-graphite leading-relaxed">
                                                             {opt.sub}
                                                         </p>
                                                     </div>
@@ -353,7 +353,7 @@ export default function FormularioSection() {
                                     >
                                         ¿Qué formato de experiencia tiene en mente?
                                     </h3>
-                                    <p className="text-sm font-light text-graphite mb-6">
+                                    <p className="text-sm font-normal text-graphite mb-6">
                                         Seleccione la propuesta que mejor se adapte a su convocatoria.
                                     </p>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
@@ -363,7 +363,7 @@ export default function FormularioSection() {
                                                 <button
                                                     key={opt.id}
                                                     onClick={() => handleFormatoExperiencia(opt.id)}
-                                                    className={`group text-left flex items-center gap-3 px-4 py-3 rounded-xl border transition-all duration-300 ${form.formatoExperiencia === opt.id
+                                                    className={`cursor-pointer group text-left flex items-center gap-3 px-4 py-3 rounded-xl border transition-all duration-300 ${form.formatoExperiencia === opt.id
                                                         ? 'border-teal bg-teal/5'
                                                         : 'border-bone hover:border-teal/40 hover:bg-teal/3'
                                                         }`}
@@ -398,7 +398,7 @@ export default function FormularioSection() {
                                             <button
                                                 key={opt.id}
                                                 onClick={() => handleDimension(opt.id)}
-                                                className={`py-5 px-4 rounded-xl border text-sm font-medium tracking-[-0.01em] transition-all duration-300 ${form.dimension === opt.id
+                                                className={`cursor-pointer py-5 px-4 rounded-xl border text-sm font-medium tracking-[-0.01em] transition-all duration-300 ${form.dimension === opt.id
                                                     ? 'border-teal bg-teal text-cream'
                                                     : 'border-bone text-graphite hover:border-teal/50 hover:text-charcoal'
                                                     }`}
@@ -440,7 +440,7 @@ export default function FormularioSection() {
                                                     min={new Date().toISOString().slice(0, 10)}
                                                     value={form.fecha}
                                                     onChange={(e) => setForm((f) => ({ ...f, fecha: e.target.value }))}
-                                                    className="w-full min-w-0 pl-11 pr-4 py-4 rounded-xl border border-bone bg-white text-sm text-charcoal focus:outline-none focus:border-teal transition-colors duration-200 [color-scheme:light]"
+                                                    className="cursor-pointer w-full min-w-0 pl-11 pr-4 py-4 rounded-xl border border-bone bg-white text-sm text-charcoal focus:outline-none focus:border-teal transition-colors duration-200 [color-scheme:light]"
                                                 />
                                             </div>
                                         </label>
@@ -459,7 +459,7 @@ export default function FormularioSection() {
                                                     placeholder="ej. Madrid, Marbella, Barcelona"
                                                     value={form.zona}
                                                     onChange={(e) => setForm((f) => ({ ...f, zona: e.target.value }))}
-                                                    className="w-full pl-11 pr-4 py-4 rounded-xl border border-bone bg-white text-sm text-charcoal placeholder-stone/60 focus:outline-none focus:border-teal transition-colors duration-200"
+                                                    className="cursor-pointer w-full pl-11 pr-4 py-4 rounded-xl border border-bone bg-white text-sm text-charcoal placeholder-stone/60 focus:outline-none focus:border-teal transition-colors duration-200"
                                                 />
                                             </div>
                                         </label>
@@ -467,7 +467,7 @@ export default function FormularioSection() {
                                     <button
                                         onClick={handleStep4Next}
                                         disabled={!form.fecha || !form.zona}
-                                        className="w-full py-4 rounded-xl bg-charcoal text-cream text-[13px] font-medium tracking-[0.08em] uppercase transition-all duration-300 hover:bg-teal disabled:opacity-30 disabled:cursor-not-allowed"
+                                        className="cursor-pointer w-full py-4 rounded-xl bg-charcoal text-cream text-[13px] font-medium tracking-[0.08em] uppercase transition-all duration-300 hover:bg-teal disabled:opacity-30 disabled:cursor-not-allowed"
                                     >
                                         Siguiente
                                     </button>
@@ -553,7 +553,7 @@ export default function FormularioSection() {
                                     {sent ? (
                                         <div className="rounded-xl border border-teal/30 bg-teal/5 p-6 text-center">
                                             <p className="text-sm font-medium text-teal mb-2">Solicitud enviada correctamente</p>
-                                            <p className="text-sm font-light text-charcoal mb-6">
+                                            <p className="text-sm font-normal text-charcoal mb-6">
                                                 Te llamaremos hoy mismo o en un máximo de 24 horas al número que nos has indicado.
                                             </p>
                                             <button
@@ -585,7 +585,7 @@ export default function FormularioSection() {
                                                 type="button"
                                                 onClick={handleSubmit}
                                                 disabled={!form.nombre || !phoneValid || !emailValid || sending}
-                                                className="w-full flex items-center justify-center gap-3 py-5 rounded-xl bg-teal text-cream text-[13px] font-medium tracking-[0.08em] uppercase transition-all duration-500 hover:bg-teal-dark hover:shadow-[0_8px_40px_rgba(182,141,60,0.35)] disabled:pointer-events-none disabled:opacity-30"
+                                                className="cursor-pointer w-full flex items-center justify-center gap-3 py-5 rounded-xl bg-teal text-cream text-[13px] font-medium tracking-[0.08em] uppercase transition-all duration-500 hover:bg-teal-dark hover:shadow-[0_8px_40px_rgba(182,141,60,0.35)] disabled:pointer-events-none disabled:opacity-30"
                                             >
                                                 {sending ? 'Enviando…' : 'Enviar solicitud'}
                                             </button>
@@ -594,7 +594,7 @@ export default function FormularioSection() {
                                                     {webhookError}
                                                 </p>
                                             )}
-                                            <p className="text-[11px] font-light text-graphite text-center mt-4">
+                                            <p className="text-[11px] font-normal text-graphite text-center mt-4">
                                                 Al hacer clic en enviar, está de acuerdo con nuestra{' '}
                                                 <a href="/politica-privacidad" className="text-teal underline hover:text-teal-dark transition-colors" target="_blank" rel="noopener noreferrer">
                                                     política de privacidad

@@ -4,7 +4,7 @@ export default function AvisoLegal() {
   return (
     <LegalLayout title="Aviso Legal">
       <p className="text-[11px] font-medium tracking-[0.2em] uppercase text-stone mb-8">
-        Última actualización: {new Date().toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })}
+        Última actualización: 19 de noviembre de 2026
       </p>
 
       <h2>1. Datos identificativos del titular</h2>
@@ -15,7 +15,8 @@ export default function AvisoLegal() {
       <ul>
         <li><strong>Titular:</strong> Whitney Solanyee Arquiñigo Pozo</li>
         <li><strong>NIE:</strong> Z0514095G</li>
-        <li><strong>Domicilio social:</strong> Calle Alicante 13, 1 E, 28100 Madrid</li>
+        <li><strong>Domicilio fiscal:</strong> Calle Alicante 13, 1º E, 28100 Alcobendas (Madrid)</li>
+        <li><strong>Dirección comercial:</strong> Paseo de la Chopera 194, escalera 3, planta baja, puerta 03, 28100 Alcobendas (Madrid)</li>
         <li><strong>Correo electrónico:</strong> administracion@lima67.com</li>
         <li><strong>Teléfono:</strong> +34 631 37 98 40</li>
       </ul>

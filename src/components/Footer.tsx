@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { InstagramLogo } from '@phosphor-icons/react';
+import { InstagramLogo, MapPin } from '@phosphor-icons/react';
 import Logo from './Logo';
 import { openCookiePreferences } from '../cookieconsent';
 
@@ -24,7 +24,7 @@ export default function Footer() {
         />
       </div>
       <div className="relative z-10 max-w-[1400px] mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-12 md:gap-8 mb-16">
           {/* Brand */}
           <div className="md:col-span-2">
             <div className="mb-6">
@@ -32,7 +32,7 @@ export default function Footer() {
                 <Logo variant="light" size="lg" />
               </Link>
             </div>
-            <p className="text-sm font-light text-sand/70 leading-relaxed max-w-[340px]">
+            <p className="text-sm font-normal text-sand/70 leading-relaxed max-w-[340px]">
               La ejecución de un restaurante de lujo, en el escenario que tú elijas. Alta
               hostelería móvil para quienes no aceptan menos que la perfección.
             </p>
@@ -52,7 +52,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    className="text-sm font-light text-sand/80 hover:text-cream transition-colors duration-300"
+                    className="text-sm font-normal text-sand/80 hover:text-cream transition-colors duration-300"
                   >
                     {link.label}
                   </a>
@@ -70,7 +70,7 @@ export default function Footer() {
               <li>
                 <Link
                   to="/aviso-legal"
-                  className="text-sm font-light text-sand/80 hover:text-cream transition-colors duration-300"
+                  className="text-sm font-normal text-sand/80 hover:text-cream transition-colors duration-300"
                 >
                   Aviso Legal
                 </Link>
@@ -78,7 +78,7 @@ export default function Footer() {
               <li>
                 <Link
                   to="/politica-privacidad"
-                  className="text-sm font-light text-sand/80 hover:text-cream transition-colors duration-300"
+                  className="text-sm font-normal text-sand/80 hover:text-cream transition-colors duration-300"
                 >
                   Política de Privacidad
                 </Link>
@@ -86,7 +86,7 @@ export default function Footer() {
               <li>
                 <Link
                   to="/politica-cookies"
-                  className="text-sm font-light text-sand/80 hover:text-cream transition-colors duration-300"
+                  className="text-sm font-normal text-sand/80 hover:text-cream transition-colors duration-300"
                 >
                   Política de Cookies
                 </Link>
@@ -95,13 +95,36 @@ export default function Footer() {
                 <button
                   type="button"
                   onClick={openCookiePreferences}
-                  className="text-sm font-light text-sand/80 hover:text-cream transition-colors duration-300 cursor-pointer"
+                  className="text-sm font-normal text-sand/80 hover:text-cream transition-colors duration-300 cursor-pointer"
                 >
                   Configurar cookies
                 </button>
               </li>
             </ul>
           </nav>
+
+          {/* Address */}
+          <div>
+            <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-sand/80 mb-5">
+              Visítanos
+            </p>
+            <address className="not-italic">
+              <a
+                href="https://maps.app.goo.gl/fffibfsFsKqY8Dbu5"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-start gap-2 text-sm font-normal text-sand/80 hover:text-cream transition-colors duration-300 leading-relaxed"
+                aria-label="Ver Paseo de la Chopera 194, 28100 Alcobendas, Madrid en Google Maps (se abre en una nueva pestaña)"
+              >
+                <MapPin size={18} weight="light" className="shrink-0 mt-[2px]" aria-hidden />
+                <span>
+                  Paseo de la Chopera 194
+                  <br />
+                  28100 Alcobendas, Madrid
+                </span>
+              </a>
+            </address>
+          </div>
 
           {/* Social */}
           <div>
@@ -135,7 +158,7 @@ export default function Footer() {
 
         {/* Bottom */}
         <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-[11px] font-light text-sand/70 tracking-[0.05em]">
+          <p className="text-[11px] font-normal text-sand/70 tracking-[0.05em]">
             &copy; {new Date().getFullYear()} Lima 67 Catering & Eventos. Todos los derechos reservados.
           </p>
         

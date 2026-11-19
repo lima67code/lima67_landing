@@ -85,7 +85,7 @@ export default function CookieBanner() {
     >
       {view === 'notice' ? (
         <>
-          <p id={titleId} className="text-[14px] font-light leading-relaxed text-graphite">
+          <p id={titleId} className="text-[14px] font-normal leading-relaxed text-graphite">
             {/* Al activar [functional]/[marketing], volver a: «…con fines funcionales, analíticos y de marketing.» */}
             Al hacer clic en «Aceptar todas», aceptas el uso de cookies en tu dispositivo con fines
             analíticos. Consulta nuestra{' '}
@@ -101,7 +101,7 @@ export default function CookieBanner() {
               setSelected(getAcceptedOptional());
               setView('preferences');
             }}
-            className="mt-4 text-[12px] font-light text-grey underline underline-offset-4 hover:text-charcoal transition-colors cursor-pointer"
+            className="mt-4 text-[12px] font-normal text-grey underline underline-offset-4 hover:text-charcoal transition-colors cursor-pointer"
           >
             Gestionar preferencias
           </button>
@@ -160,7 +160,7 @@ export default function CookieBanner() {
             })}
           </fieldset>
 
-          <p className="mt-5 text-center text-[12px] font-light text-stone">
+          <p className="mt-5 text-center text-[12px] font-normal text-stone">
             Detalle de cada cookie en la{' '}
             <Link to="/politica-cookies" className="text-gold-dark underline underline-offset-2 hover:text-charcoal">
               política de cookies

@@ -6,22 +6,22 @@ gsap.registerPlugin(ScrollTrigger);
 
 const pillars = [
   {
-    title: 'Staff de Élite',
-    subtitle: 'Equipo formado en alta hostelería y protocolo internacional para un servicio sin fricciones.',
+    title: 'Equipo Propio',
+    subtitle: 'Cocineros, camareros y bartenders con experiencia en hostelería y eventos, uniformados y bajo un mismo protocolo de servicio.',
     image: '/images/personal.webp',
-    alt: 'Personal profesional de catering en uniforme',
+    alt: 'Equipo propio de cocineros, camareros y bartenders uniformados',
   },
   {
-    title: 'Sitios Exclusivos',
-    subtitle: 'Acceso a entornos singulares que refuerzan el prestigio de su convocatoria.',
+    title: 'Producción en Obrador',
+    subtitle: 'Elaboramos en nuestro obrador de Alcobendas con control de trazabilidad. Los platos llegan listos al evento y se terminan allí con el mismo cuidado con que se prepararon.',
     image: '/images_marquee/pulpodish.webp',
-    alt: 'Lugar exclusivo decorado para evento premium',
+    alt: 'Plato de pulpo elaborado en nuestro obrador de Alcobendas',
   },
   {
-    title: 'Cocina Peruana In-Situ',
-    subtitle: 'Elaboración íntegra en el lugar del evento para garantizar la frescura y la complejidad de los sabores que definen nuestra gastronomía.',
+    title: 'Show Cooking en Directo',
+    subtitle: 'Ceviches y especialidades peruanas preparados al momento frente a sus invitados. La cocina peruana también se vive.',
     image: '/images/cocina_aire_libre.webp',
-    alt: 'Chef preparando gastronomía de autor en el lugar del evento',
+    alt: 'Chef preparando ceviche en directo frente a los invitados',
   },
 ];
 
@@ -137,17 +137,16 @@ export default function Pillars() {
         {/* Header */}
         <div data-heading className="max-w-[740px] mx-auto text-center mb-20">
           <p className="text-[11px] font-semibold tracking-[0.35em] uppercase text-gold-light mb-5">
-            Nuestro proceso
+            Como trabajamos
           </p>
           <h2
             id="pillars-heading"
             className="font-display text-[clamp(1.8rem,4vw,3rem)] font-bold leading-[1.1] tracking-[-0.02em] text-cream mb-6"
           >
-            Los pilares de una ejecución impecable
+            Los pilares de nuestro servicio
           </h2>
-          <p className="text-base md:text-lg font-light text-sand leading-relaxed">
-            Mientras otros subcontratan servicios, nosotros controlamos toda la cadena de valor para
-            garantizar que la promesa se cumpla en cada detalle.
+          <p className="text-base md:text-lg font-normal text-sand leading-relaxed">
+            Cocina, sala y barra forman un solo equipo propio. Así respondemos de cada detalle, desde la primera llamada hasta el final del evento.
           </p>
         </div>
 
@@ -190,7 +189,7 @@ export default function Pillars() {
                 {/* Subtitle: siempre visible en móvil; en desktop se muestra al hover (GSAP) */}
                 <p
                   data-subtitle
-                  className="text-sm font-light text-cream/70 leading-relaxed max-md:!h-auto max-md:!opacity-100 max-md:!overflow-visible"
+                  className="text-sm font-normal text-cream/70 leading-relaxed max-md:!h-auto max-md:!opacity-100 max-md:!overflow-visible"
                 >
                   {pillar.subtitle}
                 </p>

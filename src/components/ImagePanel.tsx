@@ -2,13 +2,15 @@ import { useEffect, useRef } from 'react';
 
 const images = [
   { src: '/images_marquee/decoracion.webp', alt: 'Decoración Lima 67' },
-  { src: '/images_marquee/fernando_partner.webp', alt: 'Fernando partner Lima67' },
   { src: '/images_marquee/pulpoman.webp', alt: 'Pulpo al estilo Lima 67', objectPosition: 'bottom' as const },
-  { src: '/images_marquee/decoracion_2.webp', alt: 'Decoración eventos' },
-  { src: '/images_marquee/mesa_fiesta.webp', alt: 'Mesa de fiesta' },
-  { src: '/images_marquee/personal_lima67.webp', alt: 'Personal Lima 67' },
+  { src: '/images_marquee/fernando_trabajadores.webp', alt: 'Equipo de cocina y sala de Lima 67 en un evento' },
+  { src: '/images_marquee/ceviche_handmade.webp', alt: 'Emplatado a mano de ceviche en porciones individuales' },
+  { src: '/images_marquee/buffet_bocados_peruanos.webp', alt: 'Buffet de bocados peruanos de Lima 67' },
+  { src: '/images_marquee/show_cooking.webp', alt: 'Cocineros de Lima 67 haciendo show cooking en directo' },
   { src: '/images_marquee/decoracion_3.webp', alt: 'Ambiente Lima 67' },
+  { src: '/images_marquee/fresh_productos.webp', alt: 'Productos frescos peruanos: frutas, verduras y tubérculos' },
   { src: '/images_marquee/pisco.webp', alt: 'Pisco peruano' },
+  { src: '/images_marquee/mesas_lima67.webp', alt: 'Mesa de bebidas decorada con flores en un evento al aire libre' },
   { src: '/images_marquee/pulpodish.webp', alt: 'Plato de pulpo Lima 67' },
 ];
 

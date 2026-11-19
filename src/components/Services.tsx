@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from 'react';
-import { ArrowRight, Buildings, Briefcase, Crown } from '@phosphor-icons/react';
+import { ArrowRight, Heart, Champagne, Briefcase } from '@phosphor-icons/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -7,34 +7,34 @@ gsap.registerPlugin(ScrollTrigger);
 
 const services = [
   {
-    id: 'institucional',
-    title: 'Institucional',
-    tag: 'B2G',
-    icon: Buildings,
+    id: 'bodas',
+    title: 'Bodas',
+    tag: 'B2C',
+    icon: Heart,
     description:
-      'Protocolo de excelencia y sabores de origen para recepciones diplomáticas en las que la imagen de su institución es prioritaria.',
-    image: '/images/institucional.webp',
-    alt: 'Recepción diplomática con servicio de protocolo',
-  },
-  {
-    id: 'corporativo',
-    title: 'Corporativo',
-    tag: 'B2B',
-    icon: Briefcase,
-    description:
-      'Logística ejecutiva y menús de autor diseñados para juntas de alta dirección que exigen discreción y tiempos exactos.',
-    image: '/images/corporativo.webp',
-    alt: 'Cena corporativa elegante con servicio de catering',
+      'Banquete, cóctel o estaciones de show cooking, con prueba de degustación previa y coordinación con la finca. Nos ocupamos de la gastronomía y del servicio para que ustedes disfruten de su día.',
+    image: '/images/bodas.webp',
+    alt: 'Catering para bodas en Madrid',
   },
   {
     id: 'privado',
-    title: 'Privado',
+    title: 'Eventos privados',
     tag: 'B2C',
-    icon: Crown,
+    icon: Champagne,
     description:
-      'La intimidad de su residencia convertida en un restaurante de lujo con servicio exclusivo y platos de firma con herencia peruana.',
-    image: '/images/evento_privado.webp',
-    alt: 'Evento privado exclusivo en residencia de lujo',
+      'Cumpleaños, aniversarios y celebraciones en casa o en el espacio que elijan. Estación de bocaditos, buffet peruano, coctelería y Pisco Bar, con montaje y recogida incluidos.',
+    image: '/images/eventos_privados.webp',
+    alt: 'Eventos privados con servicio de catering',
+  },
+  {
+    id: 'corporativo',
+    title: 'Empresas B2B',
+    tag: 'B2B',
+    icon: Briefcase,
+    description:
+      'Coffee breaks, almuerzos de trabajo, cócteles corporativos, presentaciones y eventos de marca. Presupuesto claro, factura con IVA desglosado y un único responsable de principio a fin.',
+    image: '/images/corporativo.webp',
+    alt: 'Eventos para empresas B2B con servicio de catering',
   },
 ];
 
@@ -118,12 +118,10 @@ export default function Services() {
           id="services-heading"
           className="font-display text-[clamp(1.8rem,4vw,3rem)] font-bold leading-[1.1] tracking-[-0.02em] text-charcoal mb-6"
         >
-          Un servicio para cada escenario
+          Un servicio para cada celebración
         </h2>
-        <p className="text-base md:text-lg font-light text-graphite leading-relaxed">
-          No somos un servicio de catering genérico. Hemos diseñado nuestra estructura para
-          responder a las necesidades específicas de tres sectores donde la imagen y el rigor son
-          activos críticos.
+        <p className="text-base md:text-lg font-normal text-graphite leading-relaxed">
+          Nos encargamos del catering completo de su evento: menú, equipo de cocina, sala y barra, montaje y coordinación durante todo el servicio. Trabajamos en tres líneas:
         </p>
       </div>
 
@@ -133,8 +131,7 @@ export default function Services() {
         {/* LEFT — image panel */}
         <div
           data-left
-          className="relative w-full lg:w-[55%] rounded-2xl overflow-hidden bg-bone"
-          style={{ aspectRatio: '4/3' }}
+          className="relative w-full lg:w-[45%] rounded-2xl overflow-hidden bg-bone aspect-[4/5] lg:aspect-[5/6]"
         >
           {/* Layer A */}
           <img
@@ -163,7 +160,7 @@ export default function Services() {
         {/* RIGHT — selector list */}
         <div
           data-right
-          className="flex flex-col justify-center gap-2 w-full lg:w-[45%]"
+          className="flex flex-col justify-center gap-2 lg:gap-3 w-full lg:w-[55%]"
           role="list"
           aria-label="Tipos de servicio"
         >
@@ -177,13 +174,13 @@ export default function Services() {
                 onClick={() => handleSelect(i)}
                 aria-current={isActive ? 'true' : undefined}
                 className={`
-                  group text-left w-full px-6 py-6 rounded-xl border transition-all duration-400
+                  group cursor-pointer text-left w-full px-6 py-6 lg:flex-1 lg:flex lg:items-center rounded-xl border transition-all duration-400
                   ${isActive
                     ? 'bg-charcoal border-charcoal text-cream'
                     : 'bg-white border-bone text-charcoal hover:border-charcoal/40 hover:bg-bone/50'}
                 `}
               >
-                <div className="flex items-start gap-4">
+                <div className="flex items-start gap-4 w-full">
                   {/* Icon */}
                   <div
                     className={`
@@ -209,7 +206,7 @@ export default function Services() {
                       </h3>
                     </div>
                     <p
-                      className={`text-sm font-light leading-relaxed ${isActive ? 'text-cream/75' : 'text-graphite'
+                      className={`text-sm font-normal leading-relaxed ${isActive ? 'text-cream/75' : 'text-graphite'
                         }`}
                     >
                       {service.description}

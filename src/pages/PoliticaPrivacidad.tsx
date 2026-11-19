@@ -4,14 +4,15 @@ export default function PoliticaPrivacidad() {
   return (
     <LegalLayout title="Política de Privacidad">
       <p className="text-[11px] font-medium tracking-[0.2em] uppercase text-stone mb-8">
-        Última actualización: {new Date().toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })}
+        Última actualización: 19 de noviembre de 2026
       </p>
 
       <h2>1. Responsable del tratamiento</h2>
       <p>
         <strong>Identidad:</strong> Whitney Solanyee Arquiñigo Pozo<br />
         <strong>NIE:</strong> Z0514095G<br />
-        <strong>Dirección:</strong> Calle Alicante 13, 1 E, 28100 Madrid<br />
+        <strong>Domicilio fiscal:</strong> Calle Alicante 13, 1º E, 28100 Alcobendas (Madrid)<br />
+        <strong>Dirección comercial:</strong> Paseo de la Chopera 194, escalera 3, planta baja, puerta 03, 28100 Alcobendas (Madrid)<br />
         <strong>Correo electrónico:</strong> administracion@lima67.com<br />
         <strong>Teléfono:</strong> +34 631 37 98 40
       </p>
@@ -49,7 +50,7 @@ export default function PoliticaPrivacidad() {
       <p>
         El usuario puede ejercer en cualquier momento sus derechos de acceso, rectificación, supresión,
         limitación del tratamiento, portabilidad y oposición ante el responsable del tratamiento, dirigiéndose
-        al correo electrónico o dirección postal indicados. Asimismo, tiene derecho a presentar una reclamación
+        al correo electrónico o a cualquiera de las direcciones postales indicadas. Asimismo, tiene derecho a presentar una reclamación
         ante la Agencia Española de Protección de Datos (AEPD): <a href="https://www.aepd.es" target="_blank" rel="noopener noreferrer" className="text-teal hover:text-teal-dark underline">www.aepd.es</a>.
       </p>
 

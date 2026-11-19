@@ -15,23 +15,21 @@ export default function Logo({
     lg: 'h-14',
   };
 
-  const filterStyle =
-    variant === 'light'
-      ? { filter: 'invert(1) brightness(10)' }
-      : {};
+  // dark = texto oscuro (fondos claros) · light = texto crema (fondos oscuros)
+  const base = `/logo/logo-lima67-${variant}`;
 
   return (
     <div className={`inline-flex flex-col items-center ${className}`}>
-      <img
-        src="/logo/logo-lima67.svg"
-        alt="Lima 67 logo"
-        width={1395}
-        height={609}
-        className={`${sizeClasses[size]} w-auto`}
-        style={filterStyle}
-        role="img"
-        aria-label="Lima 67 logo"
-      />
+      <picture>
+        <source srcSet={`${base}.webp`} type="image/webp" />
+        <img
+          src={`${base}.png`}
+          alt="Lima 67 Catering & Eventos"
+          width={852}
+          height={360}
+          className={`${sizeClasses[size]} w-auto`}
+        />
+      </picture>
     </div>
   );
 }
