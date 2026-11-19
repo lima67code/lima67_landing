@@ -4,7 +4,7 @@ const images = [
   { src: '/images_marquee/decoracion.webp', alt: 'Decoración Lima 67' },
   { src: '/images_marquee/pulpoman.webp', alt: 'Pulpo al estilo Lima 67', objectPosition: 'bottom' as const },
   { src: '/images_marquee/fernando_trabajadores.webp', alt: 'Equipo de cocina y sala de Lima 67 en un evento' },
-  { src: '/images_marquee/ceviche_handmade.webp', alt: 'Emplatado a mano de ceviche en porciones individuales' },
+  { src: '/images/bodas.webp', alt: 'Ceremonia de Boda, la novia con su padre' },
   { src: '/images_marquee/buffet_bocados_peruanos.webp', alt: 'Buffet de bocados peruanos de Lima 67' },
   { src: '/images_marquee/show_cooking.webp', alt: 'Cocineros de Lima 67 haciendo show cooking en directo' },
   { src: '/images_marquee/decoracion_3.webp', alt: 'Ambiente Lima 67' },
