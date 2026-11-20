@@ -126,14 +126,29 @@ export default function Hero() {
           <div ref={ctaRef}>
             <a
               href="#formulario"
-              className="group inline-flex items-center gap-3 bg-gold-dark text-cream text-[13px] font-medium tracking-[0.08em] uppercase px-10 py-4 rounded-full hover:bg-charcoal transition-all duration-500 hover:shadow-[0_8px_40px_rgba(182,141,60,0.4)]"
+              /*
+                Hover: el botón crece ~27px solo hacia la derecha.
+                - La flecha vive en un contenedor de ancho 0 → 15px (+12px de margen).
+                - El margen negativo derecho (-27px) compensa ese crecimiento, así la
+                  caja de layout no cambia: el centrado no se recalcula y el borde
+                  izquierdo no se mueve.
+                - Ambos usan la misma duración/curva para moverse sincronizados.
+                - `hover:` en Tailwind v4 solo aplica en dispositivos con ratón,
+                  así que en táctil no se queda "pegado".
+              */
+              className="group inline-flex items-center bg-gold-dark text-cream text-[13px] font-medium tracking-[0.08em] uppercase px-10 py-4 rounded-full transition-all duration-300 ease-out hover:bg-charcoal hover:shadow-[0_8px_40px_rgba(182,141,60,0.4)] hover:-mr-[27px] focus-visible:bg-charcoal focus-visible:-mr-[27px] motion-reduce:transition-none"
             >
               Solicitar Presupuesto
-              <ArrowRight
-                size={15}
-                weight="bold"
-                className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"
-              />
+              <span
+                className="inline-flex overflow-hidden w-0 ml-0 transition-all duration-300 ease-out group-hover:w-[15px] group-hover:ml-3 group-focus-visible:w-[15px] group-focus-visible:ml-3 motion-reduce:transition-none"
+                aria-hidden="true"
+              >
+                <ArrowRight
+                  size={15}
+                  weight="bold"
+                  className="shrink-0 opacity-0 -translate-x-2 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-x-0 group-focus-visible:opacity-100 group-focus-visible:translate-x-0 motion-reduce:transition-none"
+                />
+              </span>
             </a>
           </div>
         </div>

@@ -3,8 +3,10 @@ import { useEffect, useRef } from 'react';
 const images = [
   { src: '/images_marquee/decoracion.webp', alt: 'Decoración Lima 67' },
   { src: '/images_marquee/pulpoman.webp', alt: 'Pulpo al estilo Lima 67', objectPosition: 'bottom' as const },
+  { src: '/images_marquee/piscos_botellas.webp', alt: 'Botellas de pisco peruano enfriándose en hielo' },
   { src: '/images_marquee/fernando_trabajadores.webp', alt: 'Equipo de cocina y sala de Lima 67 en un evento' },
   { src: '/images/bodas.webp', alt: 'Ceremonia de Boda, la novia con su padre' },
+  { src: '/images_marquee/tartar_peruano.webp', alt: 'Tartar de salmón al estilo peruano servido en bol dorado' },
   { src: '/images_marquee/buffet_bocados_peruanos.webp', alt: 'Buffet de bocados peruanos de Lima 67' },
   { src: '/images_marquee/show_cooking.webp', alt: 'Cocineros de Lima 67 haciendo show cooking en directo' },
   { src: '/images_marquee/decoracion_3.webp', alt: 'Ambiente Lima 67' },

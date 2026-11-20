@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { Heart, Briefcase, Champagne, CalendarBlank, MapPin, ArrowLeft, CookingPot, Wine, Package, ForkKnife, Users } from '@phosphor-icons/react';
+import { Heart, Briefcase, Champagne, CalendarBlank, MapPin, ArrowLeft, CookingPot, Wine, ForkKnife, BowlFood, ChefHat, Users, Coffee, Cheers, Sparkle } from '@phosphor-icons/react';
 
 // En desarrollo usamos proxy (mismo origen) para evitar CORS con n8n
 const N8N_WEBHOOK_URL = import.meta.env.DEV
@@ -71,44 +71,77 @@ const protocoloOptions = [
     },
 ];
 
+// Ojo: los `id` se envían a n8n (formatoExperiencia). No cambiar los existentes;
+// se puede cambiar label/sub/icon/orden. Ids nuevos: banquete, estacion-bocaditos,
+// coffee-break, coctel-corporativo, eventos-marca.
 const formatoExperienciaOptions = [
+    {
+        id: 'banquete',
+        icon: ForkKnife,
+        label: 'Banquete',
+        sub: 'Menú servido en mesa',
+    },
+    {
+        id: 'servicio-catering',
+        icon: Champagne,
+        label: 'Cóctel',
+        sub: 'Recepción con bocaditos y estaciones',
+    },
+    {
+        id: 'estacion-bocaditos',
+        icon: BowlFood,
+        label: 'Estación de bocaditos',
+        sub: 'Bocaditos peruanos dulces y salados para compartir',
+    },
     {
         id: 'show-cooking',
         icon: CookingPot,
-        label: 'Show cooking',
-        sub: 'Ceviches y estaciones de autor preparadas en vivo. (Ideal para dar dinamismo a la velada).',
+        label: 'Show cooking en directo',
+        sub: 'Ceviche y especialidades preparadas frente a sus invitados',
     },
     {
         id: 'cocteleria-premium',
         icon: Wine,
-        label: 'Coctelería Premium',
-        sub: 'Barra de Pisco Sour y combinados de autor. (Perfecto para recepciones y brindis corporativos).',
-    },
-    {
-        id: 'servicio-catering',
-        icon: Package,
-        label: 'Servicio de Catering',
-        sub: 'Logística integral para eventos de cualquier escala. (Gestión completa de principio a fin).',
+        label: 'Pisco Bar',
+        sub: 'Barra con bartenders, pisco sour y coctelería de autor',
     },
     {
         id: 'alta-cocina-autor',
-        icon: ForkKnife,
-        label: 'Alta Cocina de Autor',
-        sub: 'Menú degustación, buffet o estaciones de gala. (La experiencia gastronómica de máxima exclusividad).',
+        icon: ChefHat,
+        label: 'Menú degustación',
+        sub: 'Menú en varios pases para una experiencia gastronómica',
     },
     {
         id: 'servicio-camareros',
         icon: Users,
-        label: 'Servicio de Camareros',
-        sub: 'Personal de sala profesional para servicio a mesa, barra o estaciones. (Atención elegante y discreta).',
+        label: 'Servicio de camareros',
+        sub: 'Personal de sala para su celebración',
+    },
+    {
+        id: 'coffee-break',
+        icon: Coffee,
+        label: 'Coffee break',
+        sub: 'Para reuniones, formaciones y jornadas',
+    },
+    {
+        id: 'coctel-corporativo',
+        icon: Cheers,
+        label: 'Cóctel corporativo',
+        sub: 'Presentaciones, inauguraciones y networking',
+    },
+    {
+        id: 'eventos-marca',
+        icon: Sparkle,
+        label: 'Eventos de marca',
+        sub: 'Show cooking y Pisco Bar para experiencias de empresa',
     },
 ];
 
 const dimensionOptions = [
-    { id: 'xs', label: '< 20 invitados' },
-    { id: 'sm', label: '20 – 50' },
-    { id: 'md', label: '50 – 150' },
-    { id: 'lg', label: '> 150' },
+    { id: 'xs', label: 'Hasta 20' },
+    { id: 'sm', label: 'De 21 a 50' },
+    { id: 'md', label: 'De 51 a 150' },
+    { id: 'lg', label: 'Más de 150' },
 ];
 
 const stepLabels = ['Contexto', 'Formato', 'Dimensión', 'Disponibilidad', 'Contacto'];
@@ -309,7 +342,7 @@ export default function FormularioSection() {
                                         id="form-heading"
                                         className="font-display text-[clamp(1.4rem,2.5vw,1.9rem)] font-bold leading-[1.15] tracking-[-0.02em] text-charcoal mb-10"
                                     >
-                                        Empecemos por el contexto. ¿Qué tipo de evento requiere ?
+                                        ¿Qué tipo de evento organiza?
                                     </h3>
                                     <div className="flex flex-col gap-3">
                                         {protocoloOptions.map((opt) => {
@@ -351,7 +384,7 @@ export default function FormularioSection() {
                                         id="form-heading"
                                         className="font-display text-[clamp(1.4rem,2.5vw,1.9rem)] font-bold leading-[1.15] tracking-[-0.02em] text-charcoal mb-3"
                                     >
-                                        ¿Qué formato de experiencia tiene en mente?
+                                        ¿Qué servicios le interesan?
                                     </h3>
                                     <p className="text-sm font-normal text-graphite mb-6">
                                         Seleccione la propuesta que mejor se adapte a su convocatoria.
@@ -391,7 +424,7 @@ export default function FormularioSection() {
                                         id="form-heading"
                                         className="font-display text-[clamp(1.4rem,2.5vw,1.9rem)] font-bold leading-[1.15] tracking-[-0.02em] text-charcoal mb-10"
                                     >
-                                        Entendido. ¿Cuál es la dimensión aproximada del evento?
+                                        Entendido. ¿Cuántos invitados espera?
                                     </h3>
                                     <div className="grid grid-cols-2 gap-3">
                                         {dimensionOptions.map((opt) => (
@@ -420,7 +453,7 @@ export default function FormularioSection() {
                                         id="form-heading"
                                         className="font-display text-[clamp(1.4rem,2.5vw,1.9rem)] font-bold leading-[1.15] tracking-[-0.02em] text-charcoal mb-10"
                                     >
-                                        Perfecto. Para comprobar la disponibilidad de nuestra agenda y logística:
+                                        Perfecto. ¿Cuándo y dónde será su evento?
                                     </h3>
                                     <div className="flex flex-col gap-4 mb-8">
                                         <label className="flex flex-col gap-2 min-w-0">
@@ -440,7 +473,7 @@ export default function FormularioSection() {
                                                     min={new Date().toISOString().slice(0, 10)}
                                                     value={form.fecha}
                                                     onChange={(e) => setForm((f) => ({ ...f, fecha: e.target.value }))}
-                                                    className="cursor-pointer w-full min-w-0 pl-11 pr-4 py-4 rounded-xl border border-bone bg-white text-sm text-charcoal focus:outline-none focus:border-teal transition-colors duration-200 [color-scheme:light]"
+                                                    className="cursor-pointer w-full min-w-0 pl-11 pr-4 py-4 rounded-xl border border-bone bg-white text-sm text-charcoal focus:outline-none [color-scheme:light]"
                                                 />
                                             </div>
                                         </label>
@@ -459,7 +492,7 @@ export default function FormularioSection() {
                                                     placeholder="ej. Madrid, Marbella, Barcelona"
                                                     value={form.zona}
                                                     onChange={(e) => setForm((f) => ({ ...f, zona: e.target.value }))}
-                                                    className="cursor-pointer w-full pl-11 pr-4 py-4 rounded-xl border border-bone bg-white text-sm text-charcoal placeholder-stone/60 focus:outline-none focus:border-teal transition-colors duration-200"
+                                                    className="w-full pl-11 pr-4 py-4 rounded-xl border border-bone bg-white text-sm text-charcoal placeholder-stone/60 focus:outline-none"
                                                 />
                                             </div>
                                         </label>
@@ -484,7 +517,7 @@ export default function FormularioSection() {
                                         id="form-heading"
                                         className="font-display text-[clamp(1.4rem,2.5vw,1.9rem)] font-bold leading-[1.15] tracking-[-0.02em] text-charcoal mb-3"
                                     >
-                                        Gracias. ¿A quién debemos dirigir la propuesta inicial?
+                                        Gracias. ¿Dónde le enviamos su propuesta?
                                     </h3>
                                     <div className="flex flex-col gap-4 mb-8">
                                         <label className="flex flex-col gap-2">
@@ -496,14 +529,14 @@ export default function FormularioSection() {
                                                 placeholder="Su nombre"
                                                 value={form.nombre}
                                                 onChange={(e) => setForm((f) => ({ ...f, nombre: e.target.value }))}
-                                                className="w-full px-4 py-4 rounded-xl border border-bone bg-white text-sm text-charcoal placeholder-stone/60 focus:outline-none focus:border-teal transition-colors duration-200"
+                                                className="w-full px-4 py-4 rounded-xl border border-bone bg-white text-sm text-charcoal placeholder-stone/60 focus:outline-none"
                                             />
                                         </label>
                                         <label className="flex flex-col gap-2">
                                             <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-graphite">
                                                 Celular (WhatsApp)
                                             </span>
-                                            <div className="flex rounded-xl border border-bone bg-white overflow-hidden focus-within:border-teal focus-within:ring-1 focus-within:ring-teal transition-colors">
+                                            <div className="flex rounded-xl border border-bone bg-white overflow-hidden">
                                                 <select
                                                     value={form.telefonoPrefix}
                                                     onChange={(e) => setForm((f) => ({ ...f, telefonoPrefix: e.target.value }))}
@@ -543,7 +576,7 @@ export default function FormularioSection() {
                                                 placeholder="correo@ejemplo.com"
                                                 value={form.email}
                                                 onChange={(e) => setForm((f) => ({ ...f, email: e.target.value.trim() }))}
-                                                className="w-full px-4 py-4 rounded-xl border border-bone bg-white text-sm text-charcoal placeholder-stone/60 focus:outline-none focus:border-teal transition-colors duration-200"
+                                                className="w-full px-4 py-4 rounded-xl border border-bone bg-white text-sm text-charcoal placeholder-stone/60 focus:outline-none"
                                             />
                                             {form.email && !emailValid && (
                                                 <p className="text-[11px] text-amber-700">Introduce un email válido.</p>
@@ -554,7 +587,7 @@ export default function FormularioSection() {
                                         <div className="rounded-xl border border-teal/30 bg-teal/5 p-6 text-center">
                                             <p className="text-sm font-medium text-teal mb-2">Solicitud enviada correctamente</p>
                                             <p className="text-sm font-normal text-charcoal mb-6">
-                                                Te llamaremos hoy mismo o en un máximo de 24 horas al número que nos has indicado.
+                                                Le contactaremos personalmente para preparar su propuesta a medida.
                                             </p>
                                             <button
                                                 type="button"
@@ -574,7 +607,7 @@ export default function FormularioSection() {
                                                         email: '',
                                                     });
                                                 }}
-                                                className="text-[11px] font-semibold tracking-[0.15em] uppercase text-teal border border-teal/40 rounded-full px-6 py-2.5 hover:bg-teal hover:text-cream transition-all duration-300"
+                                                className="cursor-pointer text-[11px] font-semibold tracking-[0.15em] uppercase text-teal border border-teal/40 rounded-full px-6 py-2.5 hover:bg-teal hover:text-cream transition-all duration-300"
                                             >
                                                 Enviar otra solicitud
                                             </button>

@@ -199,10 +199,18 @@ body {
   transform: scale(1.06);
 }
 
-*:focus-visible {
+/* Contorno de foco para navegación con teclado; los campos de formulario
+   no lo llevan (el cursor de texto ya indica dónde se escribe) */
+*:focus-visible:not(input):not(select):not(textarea) {
   outline: 2px solid var(--color-gold);
   outline-offset: 4px;
   border-radius: 2px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
 }
 
 .skip-link {

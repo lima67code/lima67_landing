@@ -12,10 +12,10 @@ export default function Footer() {
         aria-hidden="true"
       >
         <img
-          src="/logo/LIMA67-solo.svg"
+          src="/logo/logo-lima67-wordmark.webp"
           alt=""
-          width={400}
-          height={100}
+          width={1000}
+          height={314}
           className="w-full h-auto"
           draggable={false}
           style={{
@@ -33,8 +33,7 @@ export default function Footer() {
               </Link>
             </div>
             <p className="text-sm font-normal text-sand/70 leading-relaxed max-w-[340px]">
-              La ejecución de un restaurante de lujo, en el escenario que tú elijas. Alta
-              hostelería móvil para quienes no aceptan menos que la perfección.
+              Alta cocina peruana para bodas, eventos privados y empresas. Catering, show cooking, Pisco Bar y dirección integral de eventos en Madrid y toda España.
             </p>
           </div>
 

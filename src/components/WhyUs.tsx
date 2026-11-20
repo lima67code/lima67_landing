@@ -93,10 +93,10 @@ export default function WhyUs() {
         aria-hidden="true"
       >
         <img
-          src="/logo/LIMA67-solo.svg"
+          src="/logo/logo-lima67-wordmark.webp"
           alt=""
-          width={400}
-          height={100}
+          width={1000}
+          height={314}
           className="w-full h-auto"
           draggable={false}
           style={{

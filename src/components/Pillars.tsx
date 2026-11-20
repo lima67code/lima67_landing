@@ -4,18 +4,25 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const pillars = [
+const pillars: {
+  title: string;
+  subtitle: string;
+  image: string;
+  alt: string;
+  objectPosition?: string;
+}[] = [
   {
     title: 'Equipo Propio',
     subtitle: 'Cocineros, camareros y bartenders con experiencia en hostelería y eventos, uniformados y bajo un mismo protocolo de servicio.',
-    image: '/images/personal.webp',
+    image: '/images_marquee/show_cooking_cocineros.webp',
     alt: 'Equipo propio de cocineros, camareros y bartenders uniformados',
   },
   {
     title: 'Producción en Obrador',
     subtitle: 'Elaboramos en nuestro obrador de Alcobendas con control de trazabilidad. Los platos llegan listos al evento y se terminan allí con el mismo cuidado con que se prepararon.',
     image: '/images_marquee/pulpodish.webp',
-    alt: 'Plato de pulpo elaborado en nuestro obrador de Alcobendas',
+    alt: 'Cocinero de Lima 67 preparando ingredientes en nuestro obrador de Alcobendas',
+    objectPosition: 'bottom',
   },
   {
     title: 'Show Cooking en Directo',
@@ -32,98 +39,108 @@ export default function Pillars() {
     const el = sectionRef.current;
     if (!el) return;
 
-    // Heading reveal
-    const heading = el.querySelector('[data-heading]');
-    if (heading) {
-      gsap.fromTo(
-        heading,
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          ease: 'power3.out',
-          scrollTrigger: { trigger: heading, start: 'top 85%' },
-        }
-      );
-    }
-
-    // Pillar cards
-    const cards = el.querySelectorAll<HTMLElement>('[data-pillar]');
-    cards.forEach((card, i) => {
-      // Scroll reveal
-      gsap.fromTo(
-        card,
-        { opacity: 0, y: 80, scale: 0.95 },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 1,
-          delay: i * 0.15,
-          ease: 'power3.out',
-          scrollTrigger: { trigger: card, start: 'top 85%' },
-        }
-      );
-
-      // Parallax suave (imagen ya no sobresale, así no se recorta el borde superior)
-      const img = card.querySelector('img');
-      if (img) {
-        gsap.to(img, {
-          yPercent: 4,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: card,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: true,
-          },
-        });
+    // gsap.context: al desmontar se eliminan tweens y ScrollTriggers (evita duplicados en StrictMode)
+    const ctx = gsap.context(() => {
+      // Heading reveal
+      const heading = el.querySelector('[data-heading]');
+      if (heading) {
+        gsap.fromTo(
+          heading,
+          { opacity: 0, y: 50 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: 'power3.out',
+            scrollTrigger: { trigger: heading, start: 'top 85%' },
+          }
+        );
       }
 
-      // GSAP hover — smooth height + opacity on subtitle
-      // Only on non-touch (md+)
-      const subtitle = card.querySelector<HTMLElement>('[data-subtitle]');
-      if (!subtitle || window.matchMedia('(max-width: 767px)').matches) return;
+      const cards = el.querySelectorAll<HTMLElement>('[data-pillar]');
+      cards.forEach((card, i) => {
+        // Scroll reveal
+        gsap.fromTo(
+          card,
+          { opacity: 0, y: 80, scale: 0.95 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 1,
+            delay: i * 0.15,
+            ease: 'power3.out',
+            scrollTrigger: { trigger: card, start: 'top 85%' },
+          }
+        );
 
-      // Set initial state: hidden with no height
-      gsap.set(subtitle, { height: 0, opacity: 0, overflow: 'hidden' });
-
-      const enterTween = gsap.to(subtitle, {
-        height: 'auto',
-        opacity: 1,
-        duration: 0.65,
-        ease: 'power3.out',
-        paused: true,
+        // Parallax suave: la imagen está escalada 1.1 para tener margen y
+        // se desplaza de -4% a 4% → nunca aparece un hueco arriba ni abajo
+        const img = card.querySelector('img');
+        if (img) {
+          gsap.fromTo(
+            img,
+            { yPercent: -4, scale: 1.1 },
+            {
+              yPercent: 4,
+              scale: 1.1,
+              ease: 'none',
+              force3D: true,
+              scrollTrigger: {
+                trigger: card,
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: true,
+              },
+            }
+          );
+        }
       });
+    }, el);
 
-      const leaveTween = gsap.to(subtitle, {
-        height: 0,
-        opacity: 0,
-        duration: 0.5,
-        ease: 'power3.inOut',
-        paused: true,
+    // Hover del subtítulo solo en escritorio; matchMedia lo activa/desactiva
+    // al cambiar el tamaño de ventana y limpia los listeners automáticamente
+    const mm = gsap.matchMedia();
+    mm.add('(min-width: 768px)', () => {
+      const cleanups: (() => void)[] = [];
+      el.querySelectorAll<HTMLElement>('[data-pillar]').forEach((card) => {
+        const subtitle = card.querySelector<HTMLElement>('[data-subtitle]');
+        if (!subtitle) return;
+
+        gsap.set(subtitle, { height: 0, opacity: 0, overflow: 'hidden' });
+
+        // Un único tween por tarjeta: se interrumpe y retoma desde la altura actual
+        const show = () =>
+          gsap.to(subtitle, {
+            height: 'auto',
+            opacity: 1,
+            duration: 0.6,
+            ease: 'power3.out',
+            overwrite: true,
+          });
+        const hide = () =>
+          gsap.to(subtitle, {
+            height: 0,
+            opacity: 0,
+            duration: 0.45,
+            ease: 'power3.inOut',
+            overwrite: true,
+          });
+
+        card.addEventListener('mouseenter', show);
+        card.addEventListener('mouseleave', hide);
+        cleanups.push(() => {
+          card.removeEventListener('mouseenter', show);
+          card.removeEventListener('mouseleave', hide);
+        });
       });
-
-      const onEnter = () => {
-        leaveTween.pause();
-        enterTween.invalidate().restart();
-      };
-
-      const onLeave = () => {
-        enterTween.pause();
-        leaveTween.invalidate().restart();
-      };
-
-      card.addEventListener('mouseenter', onEnter);
-      card.addEventListener('mouseleave', onLeave);
-
-      // Cleanup
-      return () => {
-        card.removeEventListener('mouseenter', onEnter);
-        card.removeEventListener('mouseleave', onLeave);
-      };
+      return () => cleanups.forEach((fn) => fn());
     });
+
+    return () => {
+      mm.revert();
+      ctx.revert();
+    };
   }, []);
 
   return (
@@ -170,7 +187,8 @@ export default function Pillars() {
                     alt={pillar.alt}
                     width={400}
                     height={533}
-                    className="absolute inset-0 block w-full h-full object-cover object-top"
+                    className="absolute inset-0 block w-full h-full object-cover"
+                    style={{ objectPosition: pillar.objectPosition ?? 'top' }}
                     loading="lazy"
                   />
                 </div>
